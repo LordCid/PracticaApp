@@ -6,9 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.MainActivity">
 
-    <include layout="@layout/appbar" />
+    <include android:id="@+id/appbar"
+        layout="@layout/appbar" />
 
-    <include layout="@layout/content_main" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        tools:itemCount="5"
+        tools:listitem="@layout/item_list" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
