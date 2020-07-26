@@ -1,6 +1,6 @@
 package com.slashmobility.seleccion.albert.cid.domain.model
 
-data class FanGroup (
+data class Group (
     val id: Int,
     val name: String,
     val description: String,
