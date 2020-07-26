@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import kotlin.properties.Delegates
 
-class MainListAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
+class GroupListAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
     var groupList: List<Group> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
         if (oldValue != newValue) {
             notifyDataSetChanged()
