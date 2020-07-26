@@ -47,7 +47,7 @@ class ListItemViewHolder(
             imageLoader.loadImage(group.defaultImageUrl, group_container)
             title_tv.text = group.name
             date_tv.text = group.dateLong.toString()
-            description_tv.text = group.descriptionShort
+            description_short_tv.text = group.descriptionShort
         }
     }
 

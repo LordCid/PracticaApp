@@ -9,7 +9,10 @@ import android.widget.Button
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.slashmobility.seleccion.albert.cid.R
+import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupsUseCaseImpl
+import com.slashmobility.seleccion.albert.cid.presentation.main.state.DetailViewState
+import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +23,7 @@ import kotlinx.coroutines.Dispatchers
 class DetailFragment : Fragment() {
     private val imagesLoader = GlideImplementation()
 
-    private lateinit var viewmodel: MainListViewModelImpl
+    private lateinit var viewModel: MainListViewModelImpl
 
     private val viewModelFactory = MainListViewModelFactory(GetGroupsUseCaseImpl(), Dispatchers.IO)
 
@@ -30,13 +33,15 @@ class DetailFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewmodel = ViewModelProviders.of(requireActivity(), viewModelFactory)[MainListViewModelImpl::class.java]
+        viewModel = ViewModelProviders.of(
+            requireActivity(),
+            viewModelFactory
+        )[MainListViewModelImpl::class.java]
 
         activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
 //        activity?.actionBar?.setDisplayShowHomeEnabled(true)
@@ -46,5 +51,29 @@ class DetailFragment : Fragment() {
 //        view.findViewById<Button>(R.id.button_second).setOnClickListener {
 //            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
 //        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        viewModel.mainViewState.observe(::getLifecycle, ::updateUI)
+        viewModel.getGroups()
+    }
+
+//    private fun updateUI(screenState: MainViewState) {
+//        when (screenState) {
+//           is MainViewState.ShowFullData -> showGroupData(screenState.groups)
+//           is MainViewState.Error -> showError()
+//        }
+//    }
+//
+//    private fun showGroupData(group: Array<out Group>) {
+//        val g = group.
+//        TODO("Not yet implemented")
+//    }
+
+
+
+    private fun showError() {
+
     }
 }
