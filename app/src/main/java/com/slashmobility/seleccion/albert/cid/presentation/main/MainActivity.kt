@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.slashmobility.seleccion.albert.cid.R
 
+const val GROUP_ID = "GROUP_ID"
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

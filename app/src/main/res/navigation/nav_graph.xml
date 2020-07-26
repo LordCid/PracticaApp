@@ -24,5 +24,8 @@
         <action
             android:id="@+id/action_Detail_to_List"
             app:destination="@id/ListFragment" />
+        <argument
+            android:name="GROUP_ID"
+            app:argType="integer" />
     </fragment>
 </navigation>

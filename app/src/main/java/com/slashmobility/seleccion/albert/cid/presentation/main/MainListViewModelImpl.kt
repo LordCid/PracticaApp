@@ -1,9 +1,6 @@
 package com.slashmobility.seleccion.albert.cid.presentation.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupsUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import kotlinx.coroutines.*
@@ -35,6 +32,14 @@ class MainListViewModelImpl(
     }
 
     override fun getGroupDetail() {
-        TODO("Not yet implemented")
+    }
+}
+
+class MainListViewModelFactory(
+    private val getGroupsUseCase: GetGroupsUseCase,
+    private val ioDispatcher: CoroutineDispatcher
+): ViewModelProvider.NewInstanceFactory(){
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return MainListViewModelImpl(getGroupsUseCase, ioDispatcher) as T
     }
 }
