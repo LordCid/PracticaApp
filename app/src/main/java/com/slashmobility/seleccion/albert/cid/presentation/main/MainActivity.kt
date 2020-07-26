@@ -8,6 +8,8 @@ import com.slashmobility.seleccion.albert.cid.R
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var adapter: MainListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
