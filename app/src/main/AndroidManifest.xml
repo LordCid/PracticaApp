@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.slashmobility.seleccion.albert.cid">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,12 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".presentation.favorites.FavoritesActivity"
+            android:label="@string/favorites_title"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".presentation.detail.DetailActivity"
             android:label="@string/detail_title"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

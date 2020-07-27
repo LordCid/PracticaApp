@@ -2,6 +2,8 @@ package com.slashmobility.seleccion.albert.cid.presentation.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +11,7 @@ import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
+import com.slashmobility.seleccion.albert.cid.presentation.favorites.FavoritesActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -36,6 +39,22 @@ class ListActivity : BaseActivity() {
         super.onResume()
         viewModel.mainViewState.observe(::getLifecycle, ::updateUI)
         viewModel.getGroups()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_favorites -> {
+                startActivity(Intent(this, FavoritesActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setUpUI() {

@@ -37,10 +37,6 @@ class DetailActivity : BaseActivity() {
 
         supportActionBar?.title = "Fútbol"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setDisplayShowHomeEnabled(true)
-//        activity?.actionBar?.setDisplayShowHomeEnabled(true)
-
-//        activity?.toolbar?.setNavigationOnClickListener { activity?.onBackPressed() }
 
 
 //        view.findViewById<Button>(R.id.button_second).setOnClickListener {
