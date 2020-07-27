@@ -22,7 +22,7 @@ class ListFragment : Fragment() {
 
     private val imagesLoader = GlideImplementation()
     private lateinit var groupAdapter: GroupListAdapter
-    private lateinit var viewModel: MainListViewModelImpl
+    private lateinit var viewModel: MainListViewModel
     private val viewModelFactory = MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
 
     override fun onCreateView(
@@ -48,6 +48,7 @@ class ListFragment : Fragment() {
     private fun setUpUI() {
         activity?.actionBar?.title = getString(R.string.app_name)
         activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
+        activity?.actionBar?.setHomeButtonEnabled(true)
 
         listView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

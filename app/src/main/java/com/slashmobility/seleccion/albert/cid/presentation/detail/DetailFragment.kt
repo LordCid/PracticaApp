@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCaseImpl
+import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.main.GROUP_ID
 import com.slashmobility.seleccion.albert.cid.presentation.main.MainListViewModelFactory
 import com.slashmobility.seleccion.albert.cid.presentation.main.MainListViewModelImpl
@@ -21,11 +22,11 @@ import kotlinx.coroutines.Dispatchers
 class DetailFragment : Fragment() {
     private val imagesLoader = GlideImplementation()
 
-    private lateinit var viewModel: MainListViewModelImpl
+    private lateinit var viewModel: DetailViewModel
 
     private val viewModelFactory =
-        MainListViewModelFactory(
-            GetGroupListUseCaseImpl(),
+        DetailViewModelFactory(
+            GetGroupUseCaseImpl(),
             Dispatchers.IO
         )
 
@@ -43,12 +44,13 @@ class DetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(
             requireActivity(),
             viewModelFactory
-        )[MainListViewModelImpl::class.java]
+        )[DetailViewModelImpl::class.java]
 
-        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
+
+//        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
 //        activity?.actionBar?.setDisplayShowHomeEnabled(true)
 
-        activity?.toolbar?.setNavigationOnClickListener { activity?.onBackPressed() }
+//        activity?.toolbar?.setNavigationOnClickListener { activity?.onBackPressed() }
 
 //        view.findViewById<Button>(R.id.button_second).setOnClickListener {
 //            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
@@ -57,8 +59,9 @@ class DetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        activity?.actionBar?.title = getString(R.string.detail_title)
 //        viewModel.mainViewState.observe(::getLifecycle, ::updateUI)
-        viewModel.getGroups()
+        viewModel.getGroup()
     }
 
 //    private fun updateUI(screenState: MainViewState) {
