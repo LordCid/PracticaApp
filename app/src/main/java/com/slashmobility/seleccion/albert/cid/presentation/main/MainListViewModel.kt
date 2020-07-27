@@ -6,5 +6,4 @@ import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewSt
 interface MainListViewModel {
     val mainViewState: LiveData<MainViewState>
     fun getGroups()
-    fun getGroupDetail()
 }

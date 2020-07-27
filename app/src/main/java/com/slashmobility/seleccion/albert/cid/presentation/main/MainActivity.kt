@@ -19,13 +19,12 @@ import kotlinx.coroutines.Dispatchers
 
 
 const val GROUP_ID = "GROUP_ID"
-class ListActivity : BaseActivity() {
+class MainActivity : BaseActivity() {
 
     private val imagesLoader = GlideImplementation()
     private lateinit var groupAdapter: GroupListAdapter
     private lateinit var viewModel: MainListViewModel
     private val viewModelFactory = MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)

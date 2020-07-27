@@ -1,4 +1,4 @@
-package com.slashmobility.seleccion.albert.cid.presentation.main.state
+package com.slashmobility.seleccion.albert.cid.presentation.detail.state
 
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 

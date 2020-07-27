@@ -30,9 +30,6 @@ class MainListViewModelImpl(
             )
         }
     }
-
-    override fun getGroupDetail() {
-    }
 }
 
 class MainListViewModelFactory(

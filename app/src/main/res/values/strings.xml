@@ -12,4 +12,5 @@
     <string name="placeholder_title">Title</string>
     <string name="placeholder_date">10/04/2016</string>
     <string name="detail_title">Detalle</string>
+    <string name="no_favorites">No hay grupos</string>
 </resources>
