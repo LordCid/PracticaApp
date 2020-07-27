@@ -12,34 +12,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
-import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupsUseCaseImpl
+import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.coroutines.Dispatchers
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- *
- *
- */
-
 class ListFragment : Fragment() {
 
     private val imagesLoader = GlideImplementation()
-
-
     private lateinit var groupAdapter: GroupListAdapter
-
     private lateinit var viewModel: MainListViewModelImpl
-
-    private val viewModelFactory = MainListViewModelFactory(GetGroupsUseCaseImpl(), Dispatchers.IO)
+    private val viewModelFactory = MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -57,6 +46,9 @@ class ListFragment : Fragment() {
     }
 
     private fun setUpUI() {
+        activity?.actionBar?.title = getString(R.string.app_name)
+        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
+
         listView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.adapter = groupAdapter

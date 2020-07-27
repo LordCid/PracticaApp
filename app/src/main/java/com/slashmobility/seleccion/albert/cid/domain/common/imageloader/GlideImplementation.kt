@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import javax.inject.Inject
@@ -30,10 +31,8 @@ class GlideImplementation @Inject constructor() : ImagesLoader {
         }
     }
 
-    private fun getTarget(view: View): CustomTarget<Bitmap> {
-        return object: CustomTarget<Bitmap>() {
-            override fun onLoadCleared(placeholder: Drawable?) {}
-
+    private fun getTarget(view: View): SimpleTarget<Bitmap> {
+        return object: SimpleTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 view.background = BitmapDrawable(view.resources, resource)
             }

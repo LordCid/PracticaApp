@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/group_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/img_placeholder">
 
     <TextView
@@ -14,19 +14,22 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_padding_size_small"
         android:textSize="@dimen/text_size_large"
-        android:layout_marginBottom="@dimen/margin_padding_size_large"
+        android:textColor="@color/black"
+        android:background="@color/trasparentGrey"
+        android:layout_marginBottom="@dimen/margin_padding_size_xxlarge"
         app:layout_constraintVertical_chainStyle="spread_inside"
         app:layout_constraintBottom_toTopOf="@id/description_short_tv"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:text="@string/placeholder_title"/>
-
     <TextView
         android:id="@+id/date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_padding_size_small"
         android:textSize="@dimen/text_size_small"
+        android:textColor="@color/black"
+        android:background="@color/trasparentGrey"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:text="@string/placeholder_date"/>
@@ -37,6 +40,8 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_padding_size_small"
         android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/black"
+        android:background="@color/trasparentGrey"
         app:layout_constraintTop_toBottomOf="@+id/title_tv"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

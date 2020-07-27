@@ -1,12 +1,12 @@
 package com.slashmobility.seleccion.albert.cid.presentation.main
 
 import androidx.lifecycle.*
-import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupsUseCase
+import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import kotlinx.coroutines.*
 
 class MainListViewModelImpl(
-    private val getGroupsUseCase: GetGroupsUseCase,
+    private val getGroupListUseCase: GetGroupListUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ) : MainListViewModel, ViewModel() {
 
@@ -17,7 +17,7 @@ class MainListViewModelImpl(
     override fun getGroups() {
         viewModelScope.launch {
             _mainViewState.value = MainViewState.Loading
-            val results = withContext(ioDispatcher) { getGroupsUseCase() }
+            val results = withContext(ioDispatcher) { getGroupListUseCase() }
             results.fold(
                 onSuccess = {
 //                    dataList = it
@@ -36,10 +36,10 @@ class MainListViewModelImpl(
 }
 
 class MainListViewModelFactory(
-    private val getGroupsUseCase: GetGroupsUseCase,
+    private val getGroupListUseCase: GetGroupListUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModelProvider.NewInstanceFactory(){
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainListViewModelImpl(getGroupsUseCase, ioDispatcher) as T
+        return MainListViewModelImpl(getGroupListUseCase, ioDispatcher) as T
     }
 }

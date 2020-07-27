@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.*
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
-import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupsUseCase
+import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import com.slashmobility.seleccion.albert.cid.someGroup
 import com.slashmobility.seleccion.albert.cid.someOtherGroup
@@ -27,7 +27,7 @@ class MainListViewModelTest {
     private lateinit var sut: MainListViewModel
 
     private val observer = mock<Observer<MainViewState>>()
-    private val getGroupsUseCase = mock<GetGroupsUseCase>()
+    private val getGroupsUseCase = mock<GetGroupListUseCase>()
     @ExperimentalCoroutinesApi
     private val dispatcher = TestCoroutineDispatcher()
 
