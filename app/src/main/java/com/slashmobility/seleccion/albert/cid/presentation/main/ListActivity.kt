@@ -1,41 +1,34 @@
 package com.slashmobility.seleccion.albert.cid.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCaseImpl
+import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.coroutines.Dispatchers
 
-class ListFragment : Fragment() {
+
+const val GROUP_ID = "GROUP_ID"
+class ListActivity : BaseActivity() {
 
     private val imagesLoader = GlideImplementation()
     private lateinit var groupAdapter: GroupListAdapter
     private lateinit var viewModel: MainListViewModel
     private val viewModelFactory = MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_list, container, false)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setContentView(R.layout.activity_main)
+        super.onCreate(savedInstanceState)
         groupAdapter = GroupListAdapter(imagesLoader)
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory)[MainListViewModelImpl::class.java]
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[MainListViewModelImpl::class.java]
         setUpUI()
     }
 
@@ -46,18 +39,17 @@ class ListFragment : Fragment() {
     }
 
     private fun setUpUI() {
-        activity?.actionBar?.title = getString(R.string.app_name)
-        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
-        activity?.actionBar?.setHomeButtonEnabled(true)
-
         listView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.adapter = groupAdapter
         }
 
         groupAdapter.onClickItem = {
-            val bundle = bundleOf(GROUP_ID to it)
-            findNavController().navigate(R.id.action_List_to_Detail, bundle)
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(GROUP_ID, it)
+            startActivity(intent)
+//            val bundle = bundleOf(GROUP_ID to it)
+//            findNavController(this,R.id.action_List_to_Detail).navigate(R.id.action_List_to_Detail, bundle)
         }
     }
 
