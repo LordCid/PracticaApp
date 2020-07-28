@@ -8,14 +8,14 @@ class GetFavoritesGroupsUseCaseImpl : GetFavoritesGroupsUseCase {
         return Result.success(emptyList())
     }
 
-
     private val fakeGroup1 = Group(
         id = 1,
         name = "Mountain",
         description = "description",
         descriptionShort = "descriptionShort",
         defaultImageUrl = "https://homepages.cae.wisc.edu/~ece533/images/mountain.png",
-        dateLong = 1677
+        dateLong = 1677,
+        isFavorite = true
     )
 
     private val fakeGroup2 = Group(
@@ -24,6 +24,7 @@ class GetFavoritesGroupsUseCaseImpl : GetFavoritesGroupsUseCase {
         description = "description",
         descriptionShort = "descriptionShort",
         defaultImageUrl = "https://homepages.cae.wisc.edu/~ece533/images/cat.png",
-        dateLong = 1677
+        dateLong = 1677,
+        isFavorite = true
     )
 }

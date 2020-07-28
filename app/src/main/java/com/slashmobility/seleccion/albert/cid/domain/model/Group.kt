@@ -6,5 +6,6 @@ data class Group (
     val description: String,
     val descriptionShort: String,
     val defaultImageUrl: String,
-    val dateLong: Long
+    val dateLong: Long,
+    val isFavorite: Boolean
 )
