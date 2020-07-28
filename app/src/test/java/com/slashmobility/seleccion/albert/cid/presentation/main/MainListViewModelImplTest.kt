@@ -53,7 +53,7 @@ class MainListViewModelTest {
 
 
     @Test
-    fun `Should show Loading screen and call use case asyncrously`() {
+    fun `Should show Loading screen when invoke use case`() {
         runBlocking {
             val expected = MainViewState.Loading
 
@@ -66,7 +66,7 @@ class MainListViewModelTest {
     }
 
     @Test
-    fun `Given data list get, it is shown into UI`() {
+    fun `Given group list getted, it is shown into UI`() {
         runBlocking {
             val expectedList = listOf(someGroup, someGroup)
             givenSuccessResultWithValues(expectedList)
@@ -81,7 +81,7 @@ class MainListViewModelTest {
     }
 
     @Test
-    fun `Given OTHER data list get, it is shown into UI`() {
+    fun `Given OTHER group list getted, it is shown into UI`() {
         runBlocking {
             val expectedList =  listOf(someOtherGroup, someOtherGroup)
             givenSuccessResultWithValues(expectedList)
@@ -96,7 +96,7 @@ class MainListViewModelTest {
     }
 
     @Test
-    fun `Given failure when getting product list, error is shown in the UI`() {
+    fun `Given failure when getting group list, error is shown in the UI`() {
         runBlocking {
             givenFailureResult()
 

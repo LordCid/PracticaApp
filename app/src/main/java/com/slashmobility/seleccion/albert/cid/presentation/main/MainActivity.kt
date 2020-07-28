@@ -75,7 +75,7 @@ class MainActivity : BaseActivity() {
         when (screenState) {
             is MainViewState.Loading -> showLoadingDialogFragment()
             is MainViewState.ShowFullData -> showGroups(screenState.groups)
-            is MainViewState.ShowFavorites -> showGroups(screenState.groups)
+//            is MainViewState.ShowFavorites -> showGroups(screenState.groups)
             is MainViewState.Error -> showErrorDialogFragment()
         }
     }

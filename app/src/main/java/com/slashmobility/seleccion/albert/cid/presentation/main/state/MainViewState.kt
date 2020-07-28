@@ -5,6 +5,6 @@ import com.slashmobility.seleccion.albert.cid.domain.model.Group
 sealed class MainViewState {
     object Loading: MainViewState()
     class ShowFullData(val groups: List<Group>): MainViewState()
-    class ShowFavorites(val groups: List<Group>): MainViewState()
+//    class ShowFavorites(val groups: List<Group>): MainViewState()
     object Error: MainViewState()
 }

@@ -20,7 +20,6 @@ class MainListViewModelImpl(
             val results = withContext(ioDispatcher) { getGroupListUseCase() }
             results.fold(
                 onSuccess = {
-//                    dataList = it
                     _mainViewState.value = MainViewState.ShowFullData(it)
                 },
                 onFailure = {
