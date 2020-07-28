@@ -18,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class DetailActivity : BaseActivity() {
-    private val imagesLoader = GlideImplementation()
 
     private lateinit var viewModel: DetailViewModel
 

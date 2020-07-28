@@ -21,7 +21,6 @@ import kotlinx.coroutines.Dispatchers
 
 class FavoritesActivity : BaseActivity() {
 
-    private val imagesLoader = GlideImplementation()
     private lateinit var groupAdapter: GroupListAdapter
     private lateinit var viewModel: FavoritesViewModel
     private val viewModelFactory = FavoritesViewModelFactory(GetFavoritesGroupsUseCaseImpl(), Dispatchers.IO)

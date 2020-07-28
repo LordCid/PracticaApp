@@ -1,14 +1,15 @@
 package com.slashmobility.seleccion.albert.cid.presentation.common
 
-import android.content.Intent
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import com.slashmobility.seleccion.albert.cid.R
-import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
+import com.xpertai.test.domain.imageloader.GlideImplementation
 
 abstract class BaseActivity : AppCompatActivity() {
+
+    protected val imagesLoader = GlideImplementation()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
