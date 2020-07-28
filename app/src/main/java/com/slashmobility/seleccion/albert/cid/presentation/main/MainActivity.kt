@@ -20,12 +20,12 @@ import com.slashmobility.seleccion.albert.cid.presentation.favorites.FavoritesAc
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.fragment_list.listView
 import kotlinx.coroutines.Dispatchers
 
 
 const val GROUP_ID = "GROUP_ID"
-
 class MainActivity : BaseActivity() {
 
     private val imagesLoader = GlideImplementation()
@@ -34,24 +34,16 @@ class MainActivity : BaseActivity() {
     private val viewModelFactory =
         MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
 
-    private lateinit var progressDialog : ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
         groupAdapter = GroupListAdapter(imagesLoader)
-        viewModel = ViewModelProviders.of(
-            this,
-            viewModelFactory
-        )[MainListViewModelImpl::class.java]
         setUpUI()
+        setViewModel()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.mainViewState.observe(::getLifecycle, ::updateUI)
-        viewModel.getGroups()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -69,8 +61,20 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    private fun setViewModel(){
+        viewModel = ViewModelProviders.of(
+            this,
+            viewModelFactory
+        )[MainListViewModelImpl::class.java]
+        viewModel.mainViewState.observe(::getLifecycle, ::updateUI)
+        viewModel.getGroups()
+    }
+
     private fun setUpUI() {
         progressDialog = ProgressDialog(this)
+        refresh_btn.visibility = VISIBLE
+        refresh_btn.setOnClickListener { viewModel.getGroups() }
+
         listView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.adapter = groupAdapter

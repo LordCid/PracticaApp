@@ -6,16 +6,16 @@ import java.lang.Exception
 class GetGroupListUseCaseImpl : GetGroupListUseCase {
 
     override suspend fun invoke(): Result<List<Group>> {
-        return Result.failure(Exception())
-//        return Result.success(listOf(
-//            fakeGroup1,
-//            fakeGroup2,
-//            fakeGroup3,
-//            fakeGroup2,
-//            fakeGroup2,
-//            fakeGroup3,
-//            fakeGroup4)
-//        )
+//        return Result.failure(Exception())
+        return Result.success(listOf(
+            fakeGroup1,
+            fakeGroup2,
+            fakeGroup3,
+            fakeGroup2,
+            fakeGroup2,
+            fakeGroup3,
+            fakeGroup4)
+        )
     }
 
     private val fakeGroup1 = Group(
