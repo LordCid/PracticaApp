@@ -60,6 +60,7 @@ class MainListViewModelTest {
             sut.mainViewState.observeForever(observer)
             sut.getGroups()
 
+            verify(getGroupsUseCase).invoke()
             verify(observer).onChanged(expected)
 
         }

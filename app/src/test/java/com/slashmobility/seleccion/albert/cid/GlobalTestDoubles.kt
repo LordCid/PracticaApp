@@ -8,7 +8,8 @@ val someGroup = Group(
     description = "description",
     descriptionShort = "descriptionShort",
     defaultImageUrl = "url",
-    dateLong = 1677
+    dateLong = 1677,
+    isFavorite = false
 )
 
 val someOtherGroup = Group(
@@ -17,5 +18,6 @@ val someOtherGroup = Group(
     description = "other description",
     descriptionShort = "other descriptionShort",
     defaultImageUrl = "url",
-    dateLong = 1677
+    dateLong = 1677,
+    isFavorite = false
 )
