@@ -1,7 +1,7 @@
 package com.slashmobility.seleccion.albert.cid.domain.usecase
 
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
-import java.lang.Exception
+
 import javax.inject.Inject
 
 class GetGroupListUseCaseImpl @Inject constructor() : GetGroupListUseCase {

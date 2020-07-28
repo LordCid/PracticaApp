@@ -4,22 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
-import com.slashmobility.seleccion.albert.cid.domain.usecase.GetFavoritesGroupsUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.state.FavoritesViewState
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.GROUP_ID
 import com.slashmobility.seleccion.albert.cid.presentation.main.GroupListAdapter
-import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.activity_favorites.*
-import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
 
 class FavoritesActivity : BaseActivity() {
 

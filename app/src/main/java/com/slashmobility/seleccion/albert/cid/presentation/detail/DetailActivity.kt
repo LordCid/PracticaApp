@@ -2,19 +2,13 @@ package com.slashmobility.seleccion.albert.cid.presentation.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
-import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCaseImpl
-import com.slashmobility.seleccion.albert.cid.domain.usecase.SaveGroupUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailViewState
 import com.slashmobility.seleccion.albert.cid.presentation.main.GROUP_ID
-import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
