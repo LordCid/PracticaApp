@@ -7,7 +7,7 @@ import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetFavoritesGroupsUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.state.FavoritesViewState
-import com.slashmobility.seleccion.albert.cid.presentation.main.BaseActivity
+import com.slashmobility.seleccion.albert.cid.presentation.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.GroupListAdapter
 import com.xpertai.test.domain.imageloader.GlideImplementation
 import kotlinx.android.synthetic.main.activity_favorites.*
