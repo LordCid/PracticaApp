@@ -18,9 +18,9 @@ class DetailViewModelImpl(
     override val detailState: LiveData<DetailViewState>
         get() = _detailState
 
-    override fun getGroupDetailData() {
+    override fun getGroupDetailData(id: Int) {
         viewModelScope.launch {
-            val results = withContext(ioDispatcher) { getGroupUseCase() }
+            val results = withContext(ioDispatcher) { getGroupUseCase(id) }
             results.fold(
                 onSuccess = { _detailState.value = DetailViewState.ShowGroupData(it) },
                 onFailure = { _detailState.value = DetailViewState.NoData }

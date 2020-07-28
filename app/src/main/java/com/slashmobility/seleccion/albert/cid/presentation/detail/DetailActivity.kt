@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.slashmobility.seleccion.albert.cid.R
+import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.domain.usecase.SaveGroupUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
+import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailViewState
 import com.slashmobility.seleccion.albert.cid.presentation.main.GROUP_ID
 import com.xpertai.test.domain.imageloader.GlideImplementation
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.coroutines.Dispatchers
 
 /**
@@ -31,40 +34,45 @@ class DetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_detail)
         super.onCreate(savedInstanceState)
+        setViewModel()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setViewModel() {
         viewModel = ViewModelProviders.of(
             this,
             viewModelFactory
         )[DetailViewModelImpl::class.java]
-
-        supportActionBar?.title = "Fútbol"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-//        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-//            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-//        }
+        viewModel.detailState.observe(::getLifecycle, ::updateUI)
+        viewModel.getGroupDetailData(groupId)
     }
 
-    override fun onResume() {
-        super.onResume()
-//        viewModel.mainViewState.observe(::getLifecycle, ::updateUI)
-//        viewModel.detailState()
+
+    private fun updateUI(screenState: DetailViewState) {
+        when(screenState){
+            is DetailViewState.ShowGroupData -> showData(screenState.group)
+            is DetailViewState.NoData -> finish()
+        }
     }
 
-//    private fun updateUI(screenState: MainViewState) {
-//        when (screenState) {
-//           is MainViewState.ShowFullData -> showGroupData(screenState.groups)
-//           is MainViewState.Error -> showError()
-//        }
-//    }
-//
-//    private fun showGroupData(group: Array<out Group>) {
-//        val g = group.
-//        TODO("Not yet implemented")
-//    }
-
-
-    private fun showError() {
-
+    private fun showData(group: Group) {
+        supportActionBar?.title = group.name
+        title_tv.text = group.name
+        date_tv.text = group.dateLong.toString()
+        description_short_tv.text = group.descriptionShort
+        description_tv.text = group.description
+        imagesLoader.loadImage(group.defaultImageUrl, header_container)
+        setFavoriteIcon(group.isFavorite)
+        favourite_button.setOnClickListener { viewModel.changeFavorite() }
     }
+
+    private fun setFavoriteIcon(isFavorite: Boolean) {
+        if (isFavorite){
+            favourite_button.setBackgroundResource(R.drawable.ic_favorite_black)
+        } else{
+            favourite_button.setBackgroundResource(R.drawable.ic_favorite_border_black)
+        }
+    }
+
+
 }

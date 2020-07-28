@@ -5,6 +5,6 @@ import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailVi
 
 interface DetailViewModel {
     val detailState: LiveData<DetailViewState>
-    fun getGroupDetailData()
+    fun getGroupDetailData(id: Int)
     fun changeFavorite()
 }

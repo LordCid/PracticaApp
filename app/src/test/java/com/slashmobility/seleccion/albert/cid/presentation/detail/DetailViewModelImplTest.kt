@@ -56,20 +56,22 @@ class DetailViewModelImplTest {
     @Test
     fun `Should invoke usecase When get group data`() {
         runBlocking {
-            sut.getGroupDetailData()
+            val someId = 123
+            sut.getGroupDetailData(someId)
 
-            verify(getGroupUseCase).invoke()
+            verify(getGroupUseCase).invoke(someId)
         }
     }
 
     @Test
     fun `Given some group, it is shown in UI`() {
         runBlocking {
-            val expected = getSomeGroup(false)
-            givenGroup(expected)
+            val someId = 123
+            val expected = getSomeGroupById(someId)
+            givenSuccessGetGroup(expected)
 
             sut.detailState.observeForever(observer)
-            sut.getGroupDetailData()
+            sut.getGroupDetailData(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
             val actual = (captorScreenState.firstValue as DetailViewState.ShowGroupData).group
@@ -81,11 +83,12 @@ class DetailViewModelImplTest {
     @Test
     fun `Given OTHER group, it is shown in UI`() {
         runBlocking {
-            val expected = getOtherSomeGroup()
-            givenGroup(expected)
+            val someId = 456
+            val expected = getSomeGroupById(someId)
+            givenSuccessGetGroup(expected)
 
             sut.detailState.observeForever(observer)
-            sut.getGroupDetailData()
+            sut.getGroupDetailData(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
             val actual = (captorScreenState.firstValue as DetailViewState.ShowGroupData).group
@@ -96,10 +99,11 @@ class DetailViewModelImplTest {
     @Test
     fun `Given failure, when get group data, no data is shown in UI`() {
         runBlocking {
-            givenFailure()
+            val anyId = 765
+            givenGetGroupFailure()
 
             sut.detailState.observeForever(observer)
-            sut.getGroupDetailData()
+            sut.getGroupDetailData(anyId)
 
             verify(observer).onChanged(captorScreenState.capture())
             assert(captorScreenState.firstValue is DetailViewState.NoData)
@@ -109,8 +113,8 @@ class DetailViewModelImplTest {
     @Test
     fun `Given NON favorite group, when favorite action, group is stored favorite`() {
         runBlocking {
-            val expected = getSomeGroup(true)
-            val group = getSomeGroup(false)
+            val expected = getSomeGroupByFavorite(true)
+            val group = getSomeGroupByFavorite(false)
             givenLoadedGroupData(group)
 
             sut.changeFavorite()
@@ -122,8 +126,8 @@ class DetailViewModelImplTest {
     @Test
     fun `Given favorite group, when favorite action, group is stored NO favorite`() {
         runBlocking {
-            val expected = getSomeGroup(false)
-            val group = getSomeGroup(true)
+            val expected = getSomeGroupByFavorite(false)
+            val group = getSomeGroupByFavorite(true)
             givenLoadedGroupData(group)
 
             sut.changeFavorite()
@@ -135,8 +139,8 @@ class DetailViewModelImplTest {
     @Test
     fun `Given group save Success, UI is Updated`() {
         runBlocking {
-            val expected = getSomeGroup(true)
-            val group = getSomeGroup(false)
+            val expected = getSomeGroupByFavorite(true)
+            val group = getSomeGroupByFavorite(false)
             givenLoadedGroupData(group)
             givenStoreGroupSuccess()
 
@@ -151,7 +155,7 @@ class DetailViewModelImplTest {
     @Test
     fun `Given group save Failure, UI not updated`() {
         runBlocking {
-            val group = getSomeGroup(false)
+            val group = getSomeGroupByFavorite(false)
             givenLoadedGroupData(group)
             givenStoreGroupFailure()
 
@@ -162,12 +166,12 @@ class DetailViewModelImplTest {
     }
 
     private suspend fun givenLoadedGroupData(group: Group) {
-        givenGroup(group)
+        givenSuccessGetGroup(group)
         sut.detailState.observeForever(observer)
-        sut.getGroupDetailData()
+        sut.getGroupDetailData(group.id)
     }
 
-    private fun getSomeGroup(isFavorite: Boolean) = Group(
+    private fun getSomeGroupByFavorite(isFavorite: Boolean) = Group(
         id = 1,
         name = "Name",
         description = "description",
@@ -177,23 +181,23 @@ class DetailViewModelImplTest {
         isFavorite = isFavorite
     )
 
-
-    private fun getOtherSomeGroup() = Group(
-        id = 3,
-        name = "OtherName",
+    private fun getSomeGroupById(id: Int) = Group(
+        id = id,
+        name = "Name",
         description = "description",
-        descriptionShort = "OthedescriptionShort",
+        descriptionShort = "descriptionShort",
         defaultImageUrl = "url",
-        dateLong = 4567,
-        isFavorite = true
+        dateLong = 1677,
+        isFavorite = false
     )
 
-    private suspend fun givenFailure() {
-        given(getGroupUseCase.invoke()).willReturn(Result.failure(mock()))
+
+    private suspend fun givenGetGroupFailure() {
+        given(getGroupUseCase.invoke(any())).willReturn(Result.failure(mock()))
     }
 
-    private suspend fun givenGroup(group: Group) {
-        given(getGroupUseCase.invoke()).willReturn(Result.success(group))
+    private suspend fun givenSuccessGetGroup(group: Group) {
+        given(getGroupUseCase.invoke(group.id)).willReturn(Result.success(group))
     }
 
     private suspend fun givenStoreGroupSuccess(){
