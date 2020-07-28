@@ -6,14 +6,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.slashmobility.seleccion.albert.cid.R
 
-class ErrorDialogFragment: DialogFragment() {
+class ErrorDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            builder.setMessage(R.string.download_error_message)
+            return AlertDialog.Builder(it)
+                .setMessage(R.string.download_error_message)
                 .setNegativeButton(R.string.ok_label) { _, _ -> dismiss() }
-           return builder.create()
+                .create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 }
