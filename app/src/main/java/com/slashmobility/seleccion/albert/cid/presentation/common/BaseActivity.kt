@@ -4,6 +4,7 @@ package com.slashmobility.seleccion.albert.cid.presentation.common
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import com.slashmobility.seleccion.albert.cid.R
 import com.xpertai.test.domain.imageloader.ImagesLoader
 import dagger.android.AndroidInjection
@@ -13,6 +14,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var imagesLoader: ImagesLoader
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.NewInstanceFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)

@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.fragment_list.listView
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
 
 const val GROUP_ID = "GROUP_ID"
@@ -30,8 +32,6 @@ class MainActivity : BaseActivity() {
 
     private lateinit var groupAdapter: GroupListAdapter
     private lateinit var viewModel: MainListViewModel
-    private val viewModelFactory =
-        MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
 
     private lateinit var progressDialog: ProgressDialog
 
@@ -42,10 +42,8 @@ class MainActivity : BaseActivity() {
         setUpUI()
         setViewModel()
     }
-
-
+    
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }

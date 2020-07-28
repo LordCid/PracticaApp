@@ -7,6 +7,7 @@ import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailVi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class DetailViewModelImpl(
     private val getGroupUseCase: GetGroupUseCase,
@@ -38,7 +39,7 @@ class DetailViewModelImpl(
     }
 }
 
-class DetailViewModelFactory(
+class DetailViewModelFactory @Inject constructor(
     private val getGroupUseCase: GetGroupUseCase,
     private val saveGroupUseCase: SaveGroupUseCase,
     private val ioDispatcher: CoroutineDispatcher

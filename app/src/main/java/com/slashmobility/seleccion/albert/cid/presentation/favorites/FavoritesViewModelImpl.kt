@@ -6,6 +6,7 @@ import com.slashmobility.seleccion.albert.cid.presentation.favorites.state.Favor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class FavoritesViewModelImpl(
     private val getFavoritesGroupsUseCase: GetFavoritesGroupsUseCase,
@@ -33,7 +34,7 @@ class FavoritesViewModelImpl(
     }
 }
 
-class FavoritesViewModelFactory(
+class FavoritesViewModelFactory @Inject constructor(
     private val getFavoritesGroupsUseCase: GetFavoritesGroupsUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModelProvider.NewInstanceFactory(){

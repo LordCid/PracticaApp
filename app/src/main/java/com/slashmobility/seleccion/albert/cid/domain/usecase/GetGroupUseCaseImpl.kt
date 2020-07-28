@@ -1,8 +1,9 @@
 package com.slashmobility.seleccion.albert.cid.domain.usecase
 
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
+import javax.inject.Inject
 
-class GetGroupUseCaseImpl : GetGroupUseCase {
+class GetGroupUseCaseImpl @Inject constructor(): GetGroupUseCase {
     override suspend fun invoke(id: Int): Result<Group> {
         return Result.success(group)
     }

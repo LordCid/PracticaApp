@@ -2,8 +2,9 @@ package com.slashmobility.seleccion.albert.cid.domain.usecase
 
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import java.lang.Exception
+import javax.inject.Inject
 
-class GetGroupListUseCaseImpl : GetGroupListUseCase {
+class GetGroupListUseCaseImpl @Inject constructor() : GetGroupListUseCase {
 
     override suspend fun invoke(): Result<List<Group>> {
 //        return Result.failure(Exception())

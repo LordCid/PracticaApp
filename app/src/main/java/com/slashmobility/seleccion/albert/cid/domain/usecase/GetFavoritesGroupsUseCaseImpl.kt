@@ -1,11 +1,12 @@
 package com.slashmobility.seleccion.albert.cid.domain.usecase
 
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
+import javax.inject.Inject
 
-class GetFavoritesGroupsUseCaseImpl : GetFavoritesGroupsUseCase {
-    override suspend fun invoke(): Result<List<Group>>  {
-//       return Result.success(listOf(fakeGroup1, fakeGroup2))
-        return Result.success(emptyList())
+class GetFavoritesGroupsUseCaseImpl @Inject constructor(): GetFavoritesGroupsUseCase {
+    override suspend fun invoke(): Result<List<Group>> {
+       return Result.success(listOf(fakeGroup1, fakeGroup2))
+//        return Result.success(emptyList())
     }
 
     private val fakeGroup1 = Group(
