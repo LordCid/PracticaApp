@@ -1,21 +1,36 @@
 package com.slashmobility.seleccion.albert.cid.presentation.favorites
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetFavoritesGroupsUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.state.FavoritesViewState
+import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FavoritesViewModelImpl(
     private val getFavoritesGroupsUseCase: GetFavoritesGroupsUseCase,
     private val ioDispatcher: CoroutineDispatcher
-) : FavoritesViewModel {
-    override val mainViewState: LiveData<FavoritesViewState>
-        get() = TODO("Not yet implemented")
+) : FavoritesViewModel, ViewModel() {
+
+    private val _favViewState: MutableLiveData<FavoritesViewState> = MutableLiveData()
+    override val favViewState: LiveData<FavoritesViewState>
+        get() = _favViewState
 
     override fun getFavoriteGroups() {
-        TODO("Not yet implemented")
+        viewModelScope.launch {
+            val results = withContext(ioDispatcher) { getFavoritesGroupsUseCase() }
+            results.fold(
+                onSuccess = {
+                    if(it.isNotEmpty()) _favViewState.value = FavoritesViewState.ShowGroups(it)
+                    else _favViewState.value = FavoritesViewState.None
+                },
+                onFailure = {
+                    _favViewState.value = FavoritesViewState.None
+
+                }
+            )
+        }
     }
 }
 
