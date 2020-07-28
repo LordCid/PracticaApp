@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
     private val viewModelFactory =
         MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
 
-    private val progressDialog = ProgressDialog(this)
+    private lateinit var progressDialog : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
@@ -70,6 +70,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setUpUI() {
+        progressDialog = ProgressDialog(this)
         listView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.adapter = groupAdapter
