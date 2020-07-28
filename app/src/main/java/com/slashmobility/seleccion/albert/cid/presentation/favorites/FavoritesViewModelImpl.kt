@@ -3,7 +3,6 @@ package com.slashmobility.seleccion.albert.cid.presentation.favorites
 import androidx.lifecycle.*
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetFavoritesGroupsUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.state.FavoritesViewState
-import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
