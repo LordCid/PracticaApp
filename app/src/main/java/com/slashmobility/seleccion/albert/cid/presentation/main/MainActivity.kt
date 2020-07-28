@@ -28,7 +28,6 @@ import kotlinx.coroutines.Dispatchers
 const val GROUP_ID = "GROUP_ID"
 class MainActivity : BaseActivity() {
 
-//    private val imagesLoader = GlideImplementation()
     private lateinit var groupAdapter: GroupListAdapter
     private lateinit var viewModel: MainListViewModel
     private val viewModelFactory =

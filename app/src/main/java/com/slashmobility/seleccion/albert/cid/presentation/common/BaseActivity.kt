@@ -5,13 +5,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.slashmobility.seleccion.albert.cid.R
-import com.xpertai.test.domain.imageloader.GlideImplementation
+import com.xpertai.test.domain.imageloader.ImagesLoader
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected val imagesLoader = GlideImplementation()
+    @Inject
+    lateinit var imagesLoader: ImagesLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setSupportActionBar(findViewById(R.id.toolbar))
     }
