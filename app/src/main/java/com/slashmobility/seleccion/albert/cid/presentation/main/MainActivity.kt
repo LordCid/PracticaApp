@@ -4,18 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCaseImpl
-import com.slashmobility.seleccion.albert.cid.presentation.BaseActivity
+import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
+import com.slashmobility.seleccion.albert.cid.presentation.common.ErrorDialogFragment
 import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.FavoritesActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import com.xpertai.test.domain.imageloader.GlideImplementation
-import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_list.listView
 import kotlinx.coroutines.Dispatchers
 
 
@@ -79,15 +83,29 @@ class MainActivity : BaseActivity() {
         when (screenState) {
             is MainViewState.Loading -> showLoadingDialogFragment()
             is MainViewState.ShowFullData -> showGroups(screenState.groups)
-//            is MainViewState.ShowFavorites -> showGroups(screenState.groups)
-            is MainViewState.Error -> showErrorDialogFragment()
+            is MainViewState.Error -> {
+                showErrorDialogFragment()
+                showNoGroupsLabel()
+            }
         }
     }
 
+
     private fun showGroups(groups: List<Group>) { groupAdapter.groupList = groups }
 
-    private fun showLoadingDialogFragment() {}
+    private fun showLoadingDialogFragment() {
 
-    private fun showErrorDialogFragment() {}
+    }
+
+    private fun showErrorDialogFragment() {
+        ErrorDialogFragment()
+            .show(supportFragmentManager, "error")
+    }
+
+    private fun showNoGroupsLabel() {
+        listView.visibility = GONE
+        no_groups_tv.text = getString(R.string.no_groups_label)
+        no_groups_tv.visibility = VISIBLE
+    }
 
 }

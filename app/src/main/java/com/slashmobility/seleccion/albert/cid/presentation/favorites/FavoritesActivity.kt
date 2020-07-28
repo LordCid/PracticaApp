@@ -12,7 +12,7 @@ import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetFavoritesGroupsUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.state.FavoritesViewState
-import com.slashmobility.seleccion.albert.cid.presentation.BaseActivity
+import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.GROUP_ID
 import com.slashmobility.seleccion.albert.cid.presentation.main.GroupListAdapter

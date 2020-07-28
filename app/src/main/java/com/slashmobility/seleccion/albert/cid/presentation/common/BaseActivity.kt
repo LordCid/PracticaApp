@@ -1,4 +1,4 @@
-package com.slashmobility.seleccion.albert.cid.presentation
+package com.slashmobility.seleccion.albert.cid.presentation.common
 
 import android.content.Intent
 import android.os.Bundle

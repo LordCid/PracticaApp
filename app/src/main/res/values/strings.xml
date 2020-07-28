@@ -5,8 +5,11 @@
     <string name="list_fragment_label">List Fragment</string>
     <string name="detail_fragment_label">Detail Fragment</string>
     <string name="favorites_title">Favoritos</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="downloading_title_dialog">Descargando grupos</string>
+    <string name="download_error_message">Error al descargar grupos</string>
+    <string name="no_groups_label">No hay grupos</string>
+    <string name="ok_label">ACEPTAR</string>
+
 
     <string name="placeholder_loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</string>
     <string name="placeholder_title">Title</string>

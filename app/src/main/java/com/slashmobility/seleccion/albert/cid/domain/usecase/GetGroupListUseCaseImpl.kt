@@ -1,10 +1,12 @@
 package com.slashmobility.seleccion.albert.cid.domain.usecase
 
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
+import java.lang.Exception
 
 class GetGroupListUseCaseImpl : GetGroupListUseCase {
 
     override suspend fun invoke(): Result<List<Group>> {
+//        return Result.failure(Exception())
         return Result.success(listOf(
             fakeGroup1,
             fakeGroup2,
