@@ -1,5 +1,6 @@
 package com.slashmobility.seleccion.albert.cid.presentation.main
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -24,12 +25,16 @@ import kotlinx.coroutines.Dispatchers
 
 
 const val GROUP_ID = "GROUP_ID"
+
 class MainActivity : BaseActivity() {
 
     private val imagesLoader = GlideImplementation()
     private lateinit var groupAdapter: GroupListAdapter
     private lateinit var viewModel: MainListViewModel
-    private val viewModelFactory = MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
+    private val viewModelFactory =
+        MainListViewModelFactory(GetGroupListUseCaseImpl(), Dispatchers.IO)
+
+    private val progressDialog = ProgressDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
@@ -90,16 +95,20 @@ class MainActivity : BaseActivity() {
         }
     }
 
-
-    private fun showGroups(groups: List<Group>) { groupAdapter.groupList = groups }
-
     private fun showLoadingDialogFragment() {
+        progressDialog.setMessage(getString(R.string.downloading_title_dialog))
+        progressDialog.show()
+    }
 
+    private fun showGroups(groups: List<Group>) {
+        progressDialog.dismiss()
+        groupAdapter.groupList = groups
     }
 
     private fun showErrorDialogFragment() {
-        ErrorDialogFragment()
-            .show(supportFragmentManager, "error")
+        progressDialog.dismiss()
+        val errorDialog = ErrorDialogFragment()
+        errorDialog.show(supportFragmentManager, "error")
     }
 
     private fun showNoGroupsLabel() {
