@@ -31,7 +31,10 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
         groupAdapter = GroupListAdapter(imagesLoader)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[MainListViewModelImpl::class.java]
+        viewModel = ViewModelProviders.of(
+            this,
+            viewModelFactory
+        )[MainListViewModelImpl::class.java]
         setUpUI()
     }
 
@@ -81,7 +84,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun showGroups(groups: List<Group>) { groupAdapter.groupList = groups.toList() }
+    private fun showGroups(groups: List<Group>) { groupAdapter.groupList = groups }
 
     private fun showLoadingDialogFragment() {}
 
