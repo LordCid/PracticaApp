@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCaseImpl
+import com.slashmobility.seleccion.albert.cid.domain.usecase.SaveGroupUseCaseImpl
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.GROUP_ID
 import com.xpertai.test.domain.imageloader.GlideImplementation
@@ -21,6 +22,7 @@ class DetailActivity : BaseActivity() {
     private val viewModelFactory =
         DetailViewModelFactory(
             GetGroupUseCaseImpl(),
+            SaveGroupUseCaseImpl(),
             Dispatchers.IO
         )
 
@@ -46,7 +48,7 @@ class DetailActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
 //        viewModel.mainViewState.observe(::getLifecycle, ::updateUI)
-        viewModel.getGroup()
+//        viewModel.detailState()
     }
 
 //    private fun updateUI(screenState: MainViewState) {

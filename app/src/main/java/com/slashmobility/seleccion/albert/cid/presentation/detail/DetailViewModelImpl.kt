@@ -1,31 +1,49 @@
 package com.slashmobility.seleccion.albert.cid.presentation.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.slashmobility.seleccion.albert.cid.domain.model.Group
-import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCase
+import androidx.lifecycle.*
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCase
-import com.slashmobility.seleccion.albert.cid.presentation.main.MainListViewModelImpl
+import com.slashmobility.seleccion.albert.cid.domain.usecase.SaveGroupUseCase
+import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailViewState
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailViewModelImpl(
     private val getGroupUseCase: GetGroupUseCase,
+    private val saveGroupUseCase: SaveGroupUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ) : DetailViewModel, ViewModel() {
-    override val group: LiveData<Group>
-        get() = TODO("Not yet implemented")
 
-    override fun getGroup() {
+    private val _detailState: MutableLiveData<DetailViewState> = MutableLiveData()
+    override val detailState: LiveData<DetailViewState>
+        get() = _detailState
 
+    override fun getGroupDetailData() {
+        viewModelScope.launch {
+            val results = withContext(ioDispatcher) { getGroupUseCase() }
+            results.fold(
+                onSuccess = { _detailState.value = DetailViewState.ShowGroupData(it) },
+                onFailure = { _detailState.value = DetailViewState.NoData }
+            )
+        }
+    }
+
+    override fun changeFavorite() {
+        viewModelScope.launch{
+            val state = detailState.value as DetailViewState.ShowGroupData
+            val newGroup = state.group.copy(isFavorite = !state.group.isFavorite)
+            val result = withContext(ioDispatcher){ saveGroupUseCase(newGroup) }
+            result.onSuccess { _detailState.value = DetailViewState.ShowGroupData(newGroup)  }
+        }
     }
 }
 
 class DetailViewModelFactory(
     private val getGroupUseCase: GetGroupUseCase,
+    private val saveGroupUseCase: SaveGroupUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModelProvider.NewInstanceFactory(){
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DetailViewModelImpl(getGroupUseCase, ioDispatcher) as T
+        return DetailViewModelImpl(getGroupUseCase, saveGroupUseCase, ioDispatcher) as T
     }
 }
