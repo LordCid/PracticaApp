@@ -22,7 +22,7 @@
         android:id="@+id/no_groups_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_favorites"
+        android:text="@string/no_groups_label"
         android:textSize="@dimen/text_size_small"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

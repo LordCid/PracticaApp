@@ -23,7 +23,6 @@ Sed enim dolor, pretium quis sem eget, dapibus laoreet enim. Vivamus et nibh non
     <string name="placeholder_title">Title</string>
     <string name="placeholder_date">10/04/2016</string>
     <string name="detail_title">Detalle</string>
-    <string name="no_favorites">No hay grupos</string>
     <string name="title_activity_photo_detail">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
