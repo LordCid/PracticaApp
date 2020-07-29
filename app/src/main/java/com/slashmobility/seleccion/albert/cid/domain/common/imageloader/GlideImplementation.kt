@@ -17,7 +17,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.xpertai.test.domain.imageloader.ImagesLoader
 import javax.inject.Inject
 
 class GlideImplementation @Inject constructor() : ImagesLoader {

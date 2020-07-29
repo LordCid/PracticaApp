@@ -35,6 +35,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
+        setSupportActionBar(findViewById(R.id.toolbar))
         groupAdapter = GroupListAdapter(imagesLoader)
         setUpUI()
         setViewModel()

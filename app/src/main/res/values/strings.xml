@@ -114,4 +114,5 @@ Sed enim dolor, pretium quis sem eget, dapibus laoreet enim. Vivamus et nibh non
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="photo_gallery">Galeria</string>
 </resources>

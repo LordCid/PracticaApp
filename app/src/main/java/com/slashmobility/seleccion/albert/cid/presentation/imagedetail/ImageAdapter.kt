@@ -3,11 +3,11 @@ package com.slashmobility.seleccion.albert.cid.presentation.imagedetail
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.slashmobility.seleccion.albert.cid.R
-import com.xpertai.test.domain.imageloader.ImagesLoader
+import com.slashmobility.seleccion.albert.cid.domain.common.imageloader.ImagesLoader
 import kotlinx.android.synthetic.main.item_image.view.*
 import kotlin.properties.Delegates
 
@@ -18,10 +18,14 @@ class ImageAdapter(private val imagesLoader: ImagesLoader): PagerAdapter() {
         }
     }
 
-    override fun isViewFromObject(view: View, `object`: Any) = view == `object` as ConstraintLayout
+    override fun isViewFromObject(view: View, `object`: Any): Boolean{
+        return view == `object` as FrameLayout
+    }
 
 
-    override fun getCount() = urlList.size
+    override fun getCount(): Int{
+        return urlList.size
+    }
 
     override fun instantiateItem(container: ViewGroup, position: Int): View {
         val inflater: LayoutInflater = LayoutInflater.from(container.context)
@@ -30,7 +34,7 @@ class ImageAdapter(private val imagesLoader: ImagesLoader): PagerAdapter() {
         return view
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: ConstraintLayout) {
-        container.removeView(`object`)
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View)
     }
 }

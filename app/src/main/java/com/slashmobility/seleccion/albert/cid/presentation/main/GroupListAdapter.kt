@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.R
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
-import com.xpertai.test.domain.imageloader.ImagesLoader
+import com.slashmobility.seleccion.albert.cid.domain.common.imageloader.ImagesLoader
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlin.properties.Delegates
 

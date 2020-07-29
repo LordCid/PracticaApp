@@ -1,6 +1,8 @@
 package com.slashmobility.seleccion.albert.cid.domain.usecase
 
-class GetGroupImagesUseCaseImpl : GetGroupImagesUseCase {
+import javax.inject.Inject
+
+class GetGroupImagesUseCaseImpl @Inject constructor() : GetGroupImagesUseCase {
     override suspend fun invoke(): Result<List<String>> {
         return Result.success(
             listOf(

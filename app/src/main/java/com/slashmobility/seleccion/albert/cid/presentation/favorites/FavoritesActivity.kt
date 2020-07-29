@@ -24,7 +24,9 @@ class FavoritesActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_favorites)
         super.onCreate(savedInstanceState)
+        setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         groupAdapter = GroupListAdapter(imagesLoader)
         viewModel = ViewModelProviders.of(
             this,

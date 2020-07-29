@@ -1,4 +1,4 @@
-package com.xpertai.test.domain.imageloader
+package com.slashmobility.seleccion.albert.cid.domain.common.imageloader
 
 import android.view.View
 
