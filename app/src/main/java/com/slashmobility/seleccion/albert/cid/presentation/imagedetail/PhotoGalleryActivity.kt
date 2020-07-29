@@ -14,13 +14,7 @@ class PhotoGalleryActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_gallery)
-        setUpUI()
         setViewModel()
-    }
-
-    private fun setUpUI(){
-        imageAdapter = ImageAdapter(imagesLoader)
-        image_pager.adapter = imageAdapter
     }
 
     private fun setViewModel(){
@@ -40,6 +34,8 @@ class PhotoGalleryActivity : BaseActivity() {
     }
 
     private fun showImages(images: List<String>) {
+        imageAdapter = ImageAdapter(imagesLoader, supportFragmentManager)
+        image_pager.adapter = imageAdapter
         imageAdapter.urlList = images
     }
 }
