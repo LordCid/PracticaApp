@@ -19,13 +19,10 @@ import com.slashmobility.seleccion.albert.cid.presentation.common.ErrorDialogFra
 import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.FavoritesActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
-import com.xpertai.test.domain.imageloader.GlideImplementation
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.fragment_list.listView
-import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
-
 
 const val GROUP_ID = "GROUP_ID"
 class MainActivity : BaseActivity() {
