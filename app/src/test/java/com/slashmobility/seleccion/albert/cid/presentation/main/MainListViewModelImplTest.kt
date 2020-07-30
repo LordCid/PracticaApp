@@ -6,8 +6,8 @@ import com.nhaarman.mockitokotlin2.*
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
-import com.slashmobility.seleccion.albert.cid.someGroup
-import com.slashmobility.seleccion.albert.cid.someOtherGroup
+import com.slashmobility.seleccion.albert.cid.concreteGroup
+import com.slashmobility.seleccion.albert.cid.concreteOtherGroup
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -69,7 +69,7 @@ class MainListViewModelTest {
     @Test
     fun `Given group list getted, it is shown into UI`() {
         runBlocking {
-            val expectedList = listOf(someGroup, someGroup)
+            val expectedList = listOf(concreteGroup, concreteGroup)
             givenSuccessResultWithValues(expectedList)
 
             sut.mainViewState.observeForever(observer)
@@ -84,7 +84,7 @@ class MainListViewModelTest {
     @Test
     fun `Given OTHER group list getted, it is shown into UI`() {
         runBlocking {
-            val expectedList =  listOf(someOtherGroup, someOtherGroup)
+            val expectedList =  listOf(concreteOtherGroup, concreteOtherGroup)
             givenSuccessResultWithValues(expectedList)
 
             sut.mainViewState.observeForever(observer)

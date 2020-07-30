@@ -6,9 +6,8 @@ import com.nhaarman.mockitokotlin2.*
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetFavoritesGroupsUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.state.FavoritesViewState
-import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
-import com.slashmobility.seleccion.albert.cid.someGroup
-import com.slashmobility.seleccion.albert.cid.someOtherGroup
+import com.slashmobility.seleccion.albert.cid.concreteGroup
+import com.slashmobility.seleccion.albert.cid.concreteOtherGroup
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -56,7 +55,7 @@ class FavoritesViewModelTest {
     @Test
     fun `Given favorite group list, it is shown into UI`() {
         runBlocking {
-            val expectedList = listOf(someGroup, someGroup)
+            val expectedList = listOf(concreteGroup, concreteGroup)
             givenFavorites(expectedList)
 
             sut.favViewState.observeForever(observer)
@@ -71,7 +70,7 @@ class FavoritesViewModelTest {
     @Test
     fun `Given OTHER favorite group list, it is shown into UI`() {
         runBlocking {
-            val expectedList =  listOf(someOtherGroup, someOtherGroup)
+            val expectedList =  listOf(concreteOtherGroup, concreteOtherGroup)
             givenFavorites(expectedList)
 
             sut.favViewState.observeForever(observer)
