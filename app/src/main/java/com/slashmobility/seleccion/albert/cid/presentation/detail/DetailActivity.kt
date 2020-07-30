@@ -2,7 +2,6 @@ package com.slashmobility.seleccion.albert.cid.presentation.detail
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.slashmobility.seleccion.albert.cid.R
