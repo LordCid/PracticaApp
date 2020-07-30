@@ -1,7 +1,7 @@
-package com.slashmobility.seleccion.albert.cid.data
+package com.slashmobility.seleccion.albert.cid.data.network
 
 
-import com.slashmobility.seleccion.albert.cid.data.model.GroupNetworkModel
+import com.slashmobility.seleccion.albert.cid.data.network.model.GroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.domain.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

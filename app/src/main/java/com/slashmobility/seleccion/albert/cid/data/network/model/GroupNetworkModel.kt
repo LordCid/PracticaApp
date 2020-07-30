@@ -1,4 +1,4 @@
-package com.slashmobility.seleccion.albert.cid.data.model
+package com.slashmobility.seleccion.albert.cid.data.network.model
 
 import com.google.gson.annotations.SerializedName
 
