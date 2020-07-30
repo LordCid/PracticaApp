@@ -1,9 +1,5 @@
 package com.slashmobility.seleccion.albert.cid.di
 
-import com.slashmobility.seleccion.albert.cid.data.model.GroupNetworkModel
-import com.slashmobility.seleccion.albert.cid.domain.mappers.DomainMapper
-import com.slashmobility.seleccion.albert.cid.domain.mappers.Mapper
-import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.*
 import dagger.Binds
 import dagger.Module

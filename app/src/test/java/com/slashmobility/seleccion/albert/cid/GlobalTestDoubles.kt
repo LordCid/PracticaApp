@@ -1,6 +1,6 @@
 package com.slashmobility.seleccion.albert.cid
 
-import com.slashmobility.seleccion.albert.cid.data.model.GroupNetworkModel
+import com.slashmobility.seleccion.albert.cid.data.network.model.GroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 
 
