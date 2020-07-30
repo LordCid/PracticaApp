@@ -5,10 +5,11 @@ import com.slashmobility.seleccion.albert.cid.data.model.GroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.domain.mappers.Mapper
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import retrofit2.awaitResponse
+import javax.inject.Inject
 
-class NetWorkDataSourceImpl(
+class NetWorkDataSourceImpl @Inject constructor(
     private val apiService: ApiService,
-    private val mapper: Mapper<GroupNetworkModel, Group>
+    private val mapper: @JvmSuppressWildcards Mapper<GroupNetworkModel, Group>
 ) : NetWorkDataSource {
 
     override suspend fun getGroupList(): Result<List<Group>> {

@@ -16,11 +16,15 @@ import org.junit.Before
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyInt
+
 class PhotoGalleryViewModeTest {
     private lateinit var sut: PhotoGalleryViewModel
     private val observer = mock<Observer<PhotoGalleryState>>()
     private val getGroupImagesUseCase = mock<GetGroupImagesUseCase>()
     private val captorScreenState = argumentCaptor<PhotoGalleryState>()
+
+    private val someId = 123
 
     @ExperimentalCoroutinesApi
     private val dispatcher = TestCoroutineDispatcher()
@@ -48,9 +52,9 @@ class PhotoGalleryViewModeTest {
         runBlocking {
 
             sut.viewState.observeForever(observer)
-            sut.getImages()
+            sut.getImages(someId)
 
-            verify(getGroupImagesUseCase).invoke()
+            verify(getGroupImagesUseCase).invoke(someId)
         }
     }
 
@@ -61,7 +65,7 @@ class PhotoGalleryViewModeTest {
             givenSuccessResultWithValues(expected)
 
             sut.viewState.observeForever(observer)
-            sut.getImages()
+            sut.getImages(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
             val capturedState = captorScreenState.firstValue as PhotoGalleryState.ShowImages
@@ -76,7 +80,7 @@ class PhotoGalleryViewModeTest {
             givenSuccessResultWithValues(expected)
 
             sut.viewState.observeForever(observer)
-            sut.getImages()
+            sut.getImages(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
             val capturedState = captorScreenState.firstValue as PhotoGalleryState.ShowImages
@@ -90,7 +94,7 @@ class PhotoGalleryViewModeTest {
             givenFailureResult()
 
             sut.viewState.observeForever(observer)
-            sut.getImages()
+            sut.getImages(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
             assert(captorScreenState.firstValue is PhotoGalleryState.Error)
@@ -98,10 +102,10 @@ class PhotoGalleryViewModeTest {
     }
 
     private suspend fun givenSuccessResultWithValues(list: List<String>) {
-        given(getGroupImagesUseCase.invoke()).willReturn(Result.success(list))
+        given(getGroupImagesUseCase.invoke(anyInt())).willReturn(Result.success(list))
     }
 
     private suspend fun givenFailureResult() {
-        given(getGroupImagesUseCase.invoke()).willReturn(Result.failure(mock()))
+        given(getGroupImagesUseCase.invoke(anyInt())).willReturn(Result.failure(mock()))
     }
 }

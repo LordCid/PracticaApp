@@ -11,11 +11,12 @@ import dagger.android.ContributesAndroidInjector
 @Module(
     includes = [
         DomainModule::class,
+        DataModule::class,
+        ProvidesModule::class,
         ImageLoaderModule::class
     ]
 )
 interface ActivityBuilder {
-
     @ContributesAndroidInjector(modules = [MainListModule::class])
     fun bindMainListActivity(): MainActivity
 

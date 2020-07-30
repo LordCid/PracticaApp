@@ -2,9 +2,6 @@ package com.slashmobility.seleccion.albert.cid.presentation.imagedetail
 
 import androidx.lifecycle.*
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupImagesUseCase
-import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCase
-import com.slashmobility.seleccion.albert.cid.presentation.main.MainListViewModelImpl
-import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,9 +16,9 @@ class PhotoGalleryViewModelImpl(
     override val viewState: LiveData<PhotoGalleryState>
         get() = _viewState
 
-    override fun getImages() {
+    override fun getImages(id: Int) {
         viewModelScope.launch {
-            val results = withContext(ioDispatcher) { getGroupImagesUseCase() }
+            val results = withContext(ioDispatcher) { getGroupImagesUseCase(id) }
             results.fold(
                 onSuccess = {
                     _viewState.value = PhotoGalleryState.ShowImages(it)

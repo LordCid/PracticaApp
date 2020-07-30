@@ -23,7 +23,7 @@ class PhotoGalleryActivity : BaseActivity() {
             viewModelFactory
         )[PhotoGalleryViewModelImpl::class.java]
         viewModel.viewState.observe(::getLifecycle, ::updateUI)
-        viewModel.getImages()
+        viewModel.getImages(2)
     }
 
     private fun updateUI(viewState: PhotoGalleryState) {

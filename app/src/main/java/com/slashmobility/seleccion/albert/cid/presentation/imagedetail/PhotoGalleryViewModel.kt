@@ -4,5 +4,5 @@ import androidx.lifecycle.LiveData
 
 interface PhotoGalleryViewModel {
     val viewState: LiveData<PhotoGalleryState>
-    fun getImages()
+    fun getImages(id: Int)
 }
