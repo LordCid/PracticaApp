@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.*
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCase
-import com.slashmobility.seleccion.albert.cid.domain.usecase.SaveGroupUseCase
+import com.slashmobility.seleccion.albert.cid.domain.usecase.ChangeGroupFavoriteStatusUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailViewState
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
@@ -21,18 +21,17 @@ import org.junit.Rule
 import org.junit.Test
 
 class DetailViewModelImplTest {
-
-
     private lateinit var sut: DetailViewModel
 
     private val observer = mock<Observer<DetailViewState>>()
     private val getGroupUseCase = mock<GetGroupUseCase>()
-    private val saveGroupUseCase= mock<SaveGroupUseCase>()
+    private val changeGroupFavoriteStatusUseCase= mock<ChangeGroupFavoriteStatusUseCase>()
     @ExperimentalCoroutinesApi
     private val dispatcher = TestCoroutineDispatcher()
 
     private val captorScreenState = argumentCaptor<DetailViewState>()
 
+    private val someId = 123
 
     @Rule
     @JvmField
@@ -42,7 +41,7 @@ class DetailViewModelImplTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(dispatcher)
-        sut = DetailViewModelImpl(getGroupUseCase, saveGroupUseCase, dispatcher)
+        sut = DetailViewModelImpl(getGroupUseCase, changeGroupFavoriteStatusUseCase, dispatcher)
     }
 
     @ExperimentalCoroutinesApi
@@ -56,7 +55,6 @@ class DetailViewModelImplTest {
     @Test
     fun `Should invoke usecase When get group data`() {
         runBlocking {
-            val someId = 123
             sut.getGroupDetailData(someId)
 
             verify(getGroupUseCase).invoke(someId)
@@ -66,7 +64,6 @@ class DetailViewModelImplTest {
     @Test
     fun `Given some group, it is shown in UI`() {
         runBlocking {
-            val someId = 123
             val expected = getSomeGroupById(someId)
             givenSuccessGetGroup(expected)
 
@@ -99,40 +96,26 @@ class DetailViewModelImplTest {
     @Test
     fun `Given failure, when get group data, no data is shown in UI`() {
         runBlocking {
-            val anyId = 765
             givenGetGroupFailure()
 
             sut.detailState.observeForever(observer)
-            sut.getGroupDetailData(anyId)
+            sut.getGroupDetailData(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
             assert(captorScreenState.firstValue is DetailViewState.NoData)
         }
     }
 
+
     @Test
-    fun `Given NON favorite group, when favorite action, group is stored favorite`() {
+    fun `When favorite action, change favorite status use case is invoked`() {
         runBlocking {
-            val expected = getSomeGroupByFavorite(true)
-            val group = getSomeGroupByFavorite(false)
+            val group = getSomeGroupById(someId)
             givenLoadedGroupData(group)
 
             sut.changeFavorite()
 
-            verify(saveGroupUseCase).invoke(expected)
-        }
-    }
-
-    @Test
-    fun `Given favorite group, when favorite action, group is stored NO favorite`() {
-        runBlocking {
-            val expected = getSomeGroupByFavorite(false)
-            val group = getSomeGroupByFavorite(true)
-            givenLoadedGroupData(group)
-
-            sut.changeFavorite()
-
-            verify(saveGroupUseCase).invoke(expected)
+            verify(changeGroupFavoriteStatusUseCase).invoke(group.id)
         }
     }
 
@@ -201,10 +184,10 @@ class DetailViewModelImplTest {
     }
 
     private suspend fun givenStoreGroupSuccess(){
-        given(saveGroupUseCase.invoke(any())).willReturn(Result.success(Unit))
+        given(changeGroupFavoriteStatusUseCase.invoke(any())).willReturn(Result.success(Unit))
     }
 
     private suspend fun givenStoreGroupFailure(){
-        given(saveGroupUseCase.invoke(any())).willReturn(Result.failure(mock()))
+        given(changeGroupFavoriteStatusUseCase.invoke(any())).willReturn(Result.failure(mock()))
     }
 }

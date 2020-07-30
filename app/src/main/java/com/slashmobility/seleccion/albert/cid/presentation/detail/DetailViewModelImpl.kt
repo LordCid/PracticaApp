@@ -2,7 +2,7 @@ package com.slashmobility.seleccion.albert.cid.presentation.detail
 
 import androidx.lifecycle.*
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCase
-import com.slashmobility.seleccion.albert.cid.domain.usecase.SaveGroupUseCase
+import com.slashmobility.seleccion.albert.cid.domain.usecase.ChangeGroupFavoriteStatusUseCase
 import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailViewState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class DetailViewModelImpl(
     private val getGroupUseCase: GetGroupUseCase,
-    private val saveGroupUseCase: SaveGroupUseCase,
+    private val changeGroupFavoriteStatusUseCase: ChangeGroupFavoriteStatusUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ) : DetailViewModel, ViewModel() {
 
@@ -33,7 +33,7 @@ class DetailViewModelImpl(
         viewModelScope.launch{
             val state = detailState.value as DetailViewState.ShowGroupData
             val newGroup = state.group.copy(isFavorite = !state.group.isFavorite)
-            val result = withContext(ioDispatcher){ saveGroupUseCase(newGroup) }
+            val result = withContext(ioDispatcher){ changeGroupFavoriteStatusUseCase(state.group.id) }
             result.onSuccess { _detailState.value = DetailViewState.ShowGroupData(newGroup)  }
         }
     }
@@ -41,10 +41,10 @@ class DetailViewModelImpl(
 
 class DetailViewModelFactory @Inject constructor(
     private val getGroupUseCase: GetGroupUseCase,
-    private val saveGroupUseCase: SaveGroupUseCase,
+    private val changeGroupFavoriteStatusUseCase: ChangeGroupFavoriteStatusUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModelProvider.NewInstanceFactory(){
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DetailViewModelImpl(getGroupUseCase, saveGroupUseCase, ioDispatcher) as T
+        return DetailViewModelImpl(getGroupUseCase, changeGroupFavoriteStatusUseCase, ioDispatcher) as T
     }
 }
