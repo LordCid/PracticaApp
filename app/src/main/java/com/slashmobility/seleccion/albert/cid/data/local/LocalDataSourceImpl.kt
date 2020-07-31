@@ -8,7 +8,7 @@ import io.realm.RealmConfiguration
 import io.realm.RealmList
 import javax.inject.Inject
 
-class LocalDataSourceImpl @Inject constructor(
+class LocalDataSourceImpl (
     private val app: App
 ) : LocalDataSource {
 

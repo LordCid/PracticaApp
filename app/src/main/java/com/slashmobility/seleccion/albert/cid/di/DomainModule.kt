@@ -13,7 +13,7 @@ interface DomainModule {
     fun bindGetGroupUseCase(usecase: GetGroupUseCaseImpl): GetGroupUseCase
 
     @Binds
-    fun bindSaveGroupUseCase(usecase: SaveGroupUseCaseImpl): SaveGroupUseCase
+    fun bindSaveGroupUseCase(usecase: ChangeGroupFavoriteStatusUseCaseImpl): ChangeGroupFavoriteStatusUseCase
 
     @Binds
     fun bindGetFavoritesGroupUseCase(usecase: GetFavoritesGroupsUseCaseImpl): GetFavoritesGroupsUseCase

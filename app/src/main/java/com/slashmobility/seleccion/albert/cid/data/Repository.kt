@@ -7,4 +7,6 @@ interface Repository {
     suspend fun getFavoritesGroupList(): Result<List<Group>>
     suspend fun getGroupDetail(): Result<Group>
     suspend fun getGroupImages(): Result<List<String>>
+    suspend fun saveGroupNewFavoriteStatus(id: Int): Result<Unit>
+    suspend fun storeGroupList(data: List<Group>)
 }
