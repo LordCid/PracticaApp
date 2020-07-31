@@ -8,8 +8,9 @@ import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmList
+import javax.inject.Inject
 
-class LocalDataSourceImpl(
+class LocalDataSourceImpl @Inject constructor(
     private val app: App
 ) : LocalDataSource {
 

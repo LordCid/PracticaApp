@@ -3,8 +3,9 @@ package com.slashmobility.seleccion.albert.cid.data
 import com.slashmobility.seleccion.albert.cid.data.local.LocalDataSource
 import com.slashmobility.seleccion.albert.cid.data.network.NetworkDataSource
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
+import javax.inject.Inject
 
-class RepositoryImpl(
+class RepositoryImpl @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource
 ) : Repository {
