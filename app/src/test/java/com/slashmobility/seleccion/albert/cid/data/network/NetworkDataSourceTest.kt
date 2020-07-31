@@ -8,7 +8,6 @@ import com.slashmobility.seleccion.albert.cid.concreteGroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.concreteOtherGroup
 import com.slashmobility.seleccion.albert.cid.concreteOtherGroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.data.network.model.GroupNetworkModel
-import com.slashmobility.seleccion.albert.cid.domain.mappers.NetworkDataSourceMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
