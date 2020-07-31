@@ -1,7 +1,6 @@
 package com.slashmobility.seleccion.albert.cid.data.network
 
-import com.slashmobility.seleccion.albert.cid.data.ApiService
-import com.slashmobility.seleccion.albert.cid.data.model.GroupNetworkModel
+import com.slashmobility.seleccion.albert.cid.data.network.model.GroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.domain.mappers.Mapper
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import retrofit2.awaitResponse

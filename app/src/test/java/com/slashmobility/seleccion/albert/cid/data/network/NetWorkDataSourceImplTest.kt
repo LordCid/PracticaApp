@@ -7,8 +7,8 @@ import com.slashmobility.seleccion.albert.cid.concreteGroup
 import com.slashmobility.seleccion.albert.cid.concreteGroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.concreteOtherGroup
 import com.slashmobility.seleccion.albert.cid.concreteOtherGroupNetworkModel
-import com.slashmobility.seleccion.albert.cid.data.network.model.NetworkDataSourceMapperImpl
 import com.slashmobility.seleccion.albert.cid.data.network.model.GroupNetworkModel
+import com.slashmobility.seleccion.albert.cid.domain.mappers.NetworkDataSourceMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -20,7 +20,7 @@ class NetWorkDataSourceImplTest {
 
     private lateinit var sut: NetWorkDataSource
     private val apiService = mock<ApiService>()
-    private val mapper = NetworkDataSourceMapperImpl()
+    private val mapper = NetworkDataSourceMapper()
 
     @Before
     fun setUp() {

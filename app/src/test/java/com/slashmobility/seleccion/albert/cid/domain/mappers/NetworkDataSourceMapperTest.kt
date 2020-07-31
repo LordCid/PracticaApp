@@ -1,23 +1,23 @@
 package com.slashmobility.seleccion.albert.cid.domain.mappers
 
-import com.slashmobility.seleccion.albert.cid.data.model.GroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.concreteGroup
 import com.slashmobility.seleccion.albert.cid.concreteGroupNetworkModel
 import com.slashmobility.seleccion.albert.cid.concreteOtherGroup
 import com.slashmobility.seleccion.albert.cid.concreteOtherGroupNetworkModel
+import com.slashmobility.seleccion.albert.cid.data.network.model.GroupNetworkModel
 import org.junit.Before
 
 import org.junit.Assert.*
 import org.junit.Test
 
-class DomainMapperTest {
+class NetworkDataSourceMapperTest {
 
     private lateinit var sut: Mapper<GroupNetworkModel, Group>
 
     @Before
     fun setUp() {
-        sut = DomainMapper()
+        sut = NetworkDataSourceMapper()
     }
 
     @Test
