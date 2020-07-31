@@ -24,10 +24,7 @@ class NetworkDataSourceTest {
 
     @Before
     fun setUp() {
-        sut = NetworkDataSourceImpl(
-                apiService,
-                mapper
-            )
+        sut = NetworkDataSourceImpl(apiService, mapper)
     }
 
     @Test

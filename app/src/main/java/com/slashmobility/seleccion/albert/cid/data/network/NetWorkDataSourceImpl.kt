@@ -1,20 +1,22 @@
 package com.slashmobility.seleccion.albert.cid.data.network
 
 import com.slashmobility.seleccion.albert.cid.data.network.model.GroupNetworkModel
+import com.slashmobility.seleccion.albert.cid.data.network.model.toGroup
 import com.slashmobility.seleccion.albert.cid.domain.mappers.Mapper
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import retrofit2.awaitResponse
 import javax.inject.Inject
 
 class NetworkDataSourceImpl @Inject constructor(
-    private val apiService: ApiService,
-    private val mapper: @JvmSuppressWildcards Mapper<GroupNetworkModel, Group>
+    private val apiService: ApiService
 ) : NetworkDataSource {
 
     override suspend fun getGroupList(): Result<List<Group>> {
         return runCatching { apiService.getGroups().awaitResponse() }.fold(
             onSuccess = {
-                val resultList = it.body()?.let {response -> mapper.mapList(response) }.orEmpty()
+                val resultList = it.body()?.let { response ->
+                    response.map { netModel -> netModel.toGroup() }
+                }.orEmpty()
                 Result.success(resultList)
             },
             onFailure = { Result.failure(it) }

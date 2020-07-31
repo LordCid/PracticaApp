@@ -40,5 +40,5 @@ val concreteOtherGroup = Group(
     descriptionShort = "other descriptionShort",
     defaultImageUrl = "url",
     dateLong = 1677,
-    isFavorite = true
+    isFavorite = false
 )
