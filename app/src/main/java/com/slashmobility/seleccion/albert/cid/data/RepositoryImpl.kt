@@ -22,19 +22,12 @@ class RepositoryImpl(
     override suspend fun getFavoritesGroupList() = localDataSource.getGroupList(true)
 
 
-    override suspend fun getGroupDetail(): Result<Group> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getGroupDetail(id: Int) = localDataSource.getGroup(id)
 
-    override suspend fun getGroupImages(): Result<List<String>> {
-        TODO("Not yet implemented")
-    }
 
-    override suspend fun saveGroupNewFavoriteStatus(id: Int): Result<Unit> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getGroupImages(id: Int) = networkDataSource.getImagesList(id)
 
-    override suspend fun storeGroupList(data: List<Group>) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun changeGroupFavoriteStatus(id: Int) = localDataSource.changeFavoriteStatus(id)
+
+
 }
