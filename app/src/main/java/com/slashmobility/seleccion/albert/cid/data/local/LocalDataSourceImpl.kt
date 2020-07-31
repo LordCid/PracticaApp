@@ -27,7 +27,7 @@ class LocalDataSourceImpl @Inject constructor(
         realm = getRealmInstance()
         val realmList = groupList.map { it.toGroupRealmObject() }.toCollection(RealmList())
         realm.executeTransaction {
-            it.deleteAll()
+//            it.deleteAll()
             it.copyToRealm(realmList)
         }
         realm.close()
@@ -36,8 +36,15 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun getGroupList(favorite: Boolean): Result<List<Group>> {
         realm = getRealmInstance()
         return runCatching {
-            realm.where(GroupRealmModel::class.java).findAll().map {
-                it.toGroup()
+            if(favorite){
+                realm.where(GroupRealmModel::class.java).equalTo("isFavorite", true).findAll()
+                    .map{
+                        it.toGroup()
+                    }
+            } else {
+                realm.where(GroupRealmModel::class.java).findAll().map {
+                    it.toGroup()
+                }
             }
         }
     }
