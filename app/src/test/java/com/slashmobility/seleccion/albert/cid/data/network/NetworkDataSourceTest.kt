@@ -16,15 +16,15 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import retrofit2.mock.Calls
 
-class NetWorkDataSourceImplTest {
+class NetworkDataSourceTest {
 
-    private lateinit var sut: NetWorkDataSource
+    private lateinit var sut: NetworkDataSource
     private val apiService = mock<ApiService>()
     private val mapper = NetworkDataSourceMapper()
 
     @Before
     fun setUp() {
-        sut = NetWorkDataSourceImpl(
+        sut = NetworkDataSourceImpl(
                 apiService,
                 mapper
             )

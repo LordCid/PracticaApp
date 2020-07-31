@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.*
 import com.slashmobility.seleccion.albert.cid.concreteGroup
 import com.slashmobility.seleccion.albert.cid.concreteOtherGroup
 import com.slashmobility.seleccion.albert.cid.data.local.LocalDataSource
-import com.slashmobility.seleccion.albert.cid.data.network.NetWorkDataSource
+import com.slashmobility.seleccion.albert.cid.data.network.NetworkDataSource
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -14,7 +14,7 @@ import org.junit.Test
 class RepositoryImplTest {
 
     private lateinit var sut: Repository
-    private val networkDataSource = mock<NetWorkDataSource>()
+    private val networkDataSource = mock<NetworkDataSource>()
     private val localDataSource = mock<LocalDataSource>()
 
     @Before

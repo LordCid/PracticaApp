@@ -1,12 +1,12 @@
 package com.slashmobility.seleccion.albert.cid.di
 
-import com.slashmobility.seleccion.albert.cid.data.network.NetWorkDataSource
-import com.slashmobility.seleccion.albert.cid.data.network.NetWorkDataSourceImpl
+import com.slashmobility.seleccion.albert.cid.data.network.NetworkDataSource
+import com.slashmobility.seleccion.albert.cid.data.network.NetworkDataSourceImpl
 import dagger.Binds
 import dagger.Module
 
 @Module
 interface DataModule {
     @Binds
-    fun bindNetworkDataSource(netWorkDataSource: NetWorkDataSourceImpl): NetWorkDataSource
+    fun bindNetworkDataSource(netWorkDataSource: NetworkDataSourceImpl): NetworkDataSource
 }

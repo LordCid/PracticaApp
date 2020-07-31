@@ -6,10 +6,10 @@ import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import retrofit2.awaitResponse
 import javax.inject.Inject
 
-class NetWorkDataSourceImpl @Inject constructor(
+class NetworkDataSourceImpl @Inject constructor(
     private val apiService: ApiService,
     private val mapper: @JvmSuppressWildcards Mapper<GroupNetworkModel, Group>
-) : NetWorkDataSource {
+) : NetworkDataSource {
 
     override suspend fun getGroupList(): Result<List<Group>> {
         return runCatching { apiService.getGroups().awaitResponse() }.fold(

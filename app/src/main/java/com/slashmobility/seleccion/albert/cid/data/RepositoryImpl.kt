@@ -1,16 +1,16 @@
 package com.slashmobility.seleccion.albert.cid.data
 
 import com.slashmobility.seleccion.albert.cid.data.local.LocalDataSource
-import com.slashmobility.seleccion.albert.cid.data.network.NetWorkDataSource
+import com.slashmobility.seleccion.albert.cid.data.network.NetworkDataSource
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 
 class RepositoryImpl(
-    private val netWorkDataSource: NetWorkDataSource,
+    private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource
 ) : Repository {
 
     override suspend fun getGroupList(): Result<List<Group>> {
-        val results = netWorkDataSource.getGroupList()
+        val results = networkDataSource.getGroupList()
         return if(results.isFailure) {
             localDataSource.getGroupList(false)
         } else {
