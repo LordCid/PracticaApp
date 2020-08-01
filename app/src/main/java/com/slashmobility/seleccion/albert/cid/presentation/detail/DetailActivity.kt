@@ -11,6 +11,7 @@ import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailViewState
 import com.slashmobility.seleccion.albert.cid.presentation.imagedetail.ImageGalleryActivity
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.item_list.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -55,12 +56,12 @@ class DetailActivity : BaseActivity() {
         date_tv.text = dateFormat.format(group.dateLong)
         description_short_tv.text = group.descriptionShort
         description_tv.text = group.description
-        imagesLoader.loadImage(group.defaultImageUrl, header_container)
+        imagesLoader.loadImage(group.defaultImageUrl, group_container)
         favourite_button.setBackgroundResource(getFavoriteIcon(group.isFavorite))
     }
 
     private fun setClickListeners(){
-        header_container.setOnClickListener { goToPhotoGallery() }
+        group_container.setOnClickListener { goToPhotoGallery() }
         favourite_button.setOnClickListener { viewModel.changeFavorite() }
     }
 

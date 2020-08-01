@@ -61,7 +61,6 @@ class ListFragment(private val imagesLoader: ImagesLoader): Fragment() {
 
     fun showNoGroupsLabel() {
         listView.visibility = View.GONE
-        no_groups_tv.text = getString(R.string.no_groups_label)
         no_groups_tv.visibility = View.VISIBLE
     }
 }

@@ -24,58 +24,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/header_container"
+            <include
+                layout="@layout/item_list"
                 android:layout_width="0dp"
                 android:layout_height="180dp"
-                android:background="@drawable/img_placeholder"
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/favourite_button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/title_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_padding_size_large"
-                    android:padding="@dimen/margin_padding_size_small"
-                    android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/black"
-                    android:background="@color/trasparentGrey"
-                    app:layout_constraintBottom_toTopOf="@id/description_short_tv"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="spread_inside"
-                    android:text="@string/placeholder_title" />
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:id="@+id/header_container"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="180dp"-->
+            <!--                android:background="@drawable/img_placeholder"-->
+            <!--                android:clickable="true"-->
+            <!--                android:focusable="true"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintBottom_toTopOf="@id/favourite_button"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent">-->
 
-                <TextView
-                    android:id="@+id/date_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_padding_size_small"
-                    android:textSize="@dimen/text_size_small"
-                    android:textColor="@color/black"
-                    android:background="@color/trasparentGrey"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/placeholder_date" />
 
-                <TextView
-                    android:id="@+id/description_short_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_padding_size_small"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textColor="@color/black"
-                    android:background="@color/trasparentGrey"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title_tv"
-                    android:text="@string/placeholder_loremipsum" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageButton
                 android:id="@+id/favourite_button"
@@ -84,18 +56,19 @@
                 android:background="@drawable/ic_favorite_border_black"
                 app:layout_constraintBottom_toTopOf="@+id/description_tv"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header_container" />
+                app:layout_constraintTop_toBottomOf="@+id/group_container" />
 
             <TextView
                 android:id="@+id/description_tv"
+                style="@style/AppTextAppearance"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@string/placeholder_loremipsum_long"
                 android:textSize="@dimen/text_size_medium"
-                app:layout_constraintTop_toBottomOf="@+id/favourite_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/placeholder_loremipsum_long" />
+                app:layout_constraintTop_toBottomOf="@+id/favourite_button" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
