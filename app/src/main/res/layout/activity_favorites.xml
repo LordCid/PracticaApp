@@ -7,27 +7,13 @@
     tools:context=".presentation.favorites.FavoritesActivity">
 
     <include layout="@layout/appbar" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoriteListView"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_list" />
-
-    <TextView
-        android:id="@+id/no_favorites_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_groups_label"
-        android:textSize="@dimen/text_size_small"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar"/>
+        app:layout_constraintTop_toBottomOf="@id/appbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

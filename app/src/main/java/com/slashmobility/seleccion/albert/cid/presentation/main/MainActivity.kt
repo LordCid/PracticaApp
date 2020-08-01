@@ -5,37 +5,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.R
-import com.slashmobility.seleccion.albert.cid.domain.GROUP_ID
-import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.common.ErrorDialogFragment
-import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.FavoritesActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
-
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar.*
-import kotlinx.android.synthetic.main.fragment_list.listView
-
 
 class MainActivity : BaseActivity() {
 
-    private lateinit var groupAdapter: GroupListAdapter
     private lateinit var viewModel: MainListViewModel
-
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var listFragment: ListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
         setSupportActionBar(findViewById(R.id.toolbar))
-        groupAdapter = GroupListAdapter(imagesLoader, dateFormat)
+        listFragment = ListFragment(imagesLoader)
         setUpUI()
         setViewModel()
     }
@@ -68,28 +57,22 @@ class MainActivity : BaseActivity() {
         progressDialog = ProgressDialog(this)
         refresh_btn.visibility = VISIBLE
         refresh_btn.setOnClickListener { viewModel.getGroups() }
-
-        listView.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            this.adapter = groupAdapter
-        }
-
-        groupAdapter.onClickItem = {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(GROUP_ID, it)
-            startActivity(intent)
-//            val bundle = bundleOf(GROUP_ID to it)
-//            findNavController(this,R.id.action_List_to_Detail).navigate(R.id.action_List_to_Detail, bundle)
+        with(supportFragmentManager.beginTransaction()){
+            add(R.id.fragment_list, listFragment)
+            commit()
         }
     }
 
     private fun updateUI(screenState: MainViewState) {
         when (screenState) {
             is MainViewState.Loading -> showLoadingDialogFragment()
-            is MainViewState.ShowFullData -> showGroups(screenState.groups)
+            is MainViewState.ShowFullData ->{
+                progressDialog.dismiss()
+                listFragment.showGroups(screenState.groups)
+            }
             is MainViewState.Error -> {
                 showErrorDialogFragment()
-                showNoGroupsLabel()
+                listFragment.showNoGroupsLabel()
             }
         }
     }
@@ -99,21 +82,11 @@ class MainActivity : BaseActivity() {
         progressDialog.show()
     }
 
-    private fun showGroups(groups: List<Group>) {
-        progressDialog.dismiss()
-        groupAdapter.groupList = groups
-    }
-
     private fun showErrorDialogFragment() {
         progressDialog.dismiss()
         val errorDialog = ErrorDialogFragment()
         errorDialog.show(supportFragmentManager, "error")
     }
 
-    private fun showNoGroupsLabel() {
-        listView.visibility = GONE
-        no_groups_tv.text = getString(R.string.no_groups_label)
-        no_groups_tv.visibility = VISIBLE
-    }
 
 }
