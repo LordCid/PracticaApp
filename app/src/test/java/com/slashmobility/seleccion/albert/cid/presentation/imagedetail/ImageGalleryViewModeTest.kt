@@ -18,11 +18,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 
-class PhotoGalleryViewModeTest {
-    private lateinit var sut: PhotoGalleryViewModel
-    private val observer = mock<Observer<PhotoGalleryState>>()
+class ImageGalleryViewModeTest {
+    private lateinit var sut: ImageGalleryViewModel
+    private val observer = mock<Observer<ImageGalleryState>>()
     private val getGroupImagesUseCase = mock<GetGroupImagesUseCase>()
-    private val captorScreenState = argumentCaptor<PhotoGalleryState>()
+    private val captorScreenState = argumentCaptor<ImageGalleryState>()
 
     private val someId = 123
 
@@ -37,7 +37,7 @@ class PhotoGalleryViewModeTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(dispatcher)
-        sut = PhotoGalleryViewModelImpl(getGroupImagesUseCase, dispatcher)
+        sut = ImageGalleryViewModelImpl(getGroupImagesUseCase, dispatcher)
     }
 
     @ExperimentalCoroutinesApi
@@ -68,7 +68,7 @@ class PhotoGalleryViewModeTest {
             sut.getImages(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
-            val capturedState = captorScreenState.firstValue as PhotoGalleryState.ShowImages
+            val capturedState = captorScreenState.firstValue as ImageGalleryState.ShowImages
             assertEquals(expected, capturedState.images)
         }
     }
@@ -83,7 +83,7 @@ class PhotoGalleryViewModeTest {
             sut.getImages(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
-            val capturedState = captorScreenState.firstValue as PhotoGalleryState.ShowImages
+            val capturedState = captorScreenState.firstValue as ImageGalleryState.ShowImages
             assertEquals(expected, capturedState.images)
         }
     }
@@ -97,7 +97,7 @@ class PhotoGalleryViewModeTest {
             sut.getImages(someId)
 
             verify(observer).onChanged(captorScreenState.capture())
-            assert(captorScreenState.firstValue is PhotoGalleryState.Error)
+            assert(captorScreenState.firstValue is ImageGalleryState.Error)
         }
     }
 

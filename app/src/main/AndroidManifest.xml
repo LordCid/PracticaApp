@@ -31,7 +31,7 @@
             android:label="@string/detail_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".presentation.imagedetail.PhotoGalleryActivity"
+            android:name=".presentation.imagedetail.ImageGalleryActivity"
             android:label="@string/photo_gallery"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

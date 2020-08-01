@@ -3,7 +3,7 @@ package com.slashmobility.seleccion.albert.cid.di
 
 import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.FavoritesActivity
-import com.slashmobility.seleccion.albert.cid.presentation.imagedetail.PhotoGalleryActivity
+import com.slashmobility.seleccion.albert.cid.presentation.imagedetail.ImageGalleryActivity
 import com.slashmobility.seleccion.albert.cid.presentation.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -27,5 +27,5 @@ interface ActivityBuilder {
     fun bindDetailActivity(): DetailActivity
 
     @ContributesAndroidInjector(modules = [PhotoGalleryModule::class])
-    fun bindPhotoGalleryActivity(): PhotoGalleryActivity
+    fun bindPhotoGalleryActivity(): ImageGalleryActivity
 }

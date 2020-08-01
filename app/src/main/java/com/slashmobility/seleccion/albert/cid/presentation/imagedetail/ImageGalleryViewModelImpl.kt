@@ -7,13 +7,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PhotoGalleryViewModelImpl(
+class ImageGalleryViewModelImpl(
     private val getGroupImagesUseCase: GetGroupImagesUseCase,
     private val ioDispatcher: CoroutineDispatcher
-) : PhotoGalleryViewModel, ViewModel() {
+) : ImageGalleryViewModel, ViewModel() {
 
-    private val _viewState: MutableLiveData<PhotoGalleryState> = MutableLiveData()
-    override val viewState: LiveData<PhotoGalleryState>
+    private val _viewState: MutableLiveData<ImageGalleryState> = MutableLiveData()
+    override val viewState: LiveData<ImageGalleryState>
         get() = _viewState
 
     override fun getImages(id: Int) {
@@ -21,10 +21,10 @@ class PhotoGalleryViewModelImpl(
             val results = withContext(ioDispatcher) { getGroupImagesUseCase(id) }
             results.fold(
                 onSuccess = {
-                    _viewState.value = PhotoGalleryState.ShowImages(it)
+                    _viewState.value = ImageGalleryState.ShowImages(it)
                 },
                 onFailure = {
-                    _viewState.value = PhotoGalleryState.Error
+                    _viewState.value = ImageGalleryState.Error
 
                 }
             )
@@ -36,6 +36,6 @@ class PhotoGalleryViewModeFactory @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModelProvider.NewInstanceFactory(){
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return PhotoGalleryViewModelImpl(getGroupImagesUseCase, ioDispatcher) as T
+        return ImageGalleryViewModelImpl(getGroupImagesUseCase, ioDispatcher) as T
     }
 }
