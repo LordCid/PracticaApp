@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
         setSupportActionBar(findViewById(R.id.toolbar))
-        groupAdapter = GroupListAdapter(imagesLoader)
+        groupAdapter = GroupListAdapter(imagesLoader, dateFormat)
         setUpUI()
         setViewModel()
     }

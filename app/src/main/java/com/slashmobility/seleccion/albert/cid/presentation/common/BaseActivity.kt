@@ -2,6 +2,7 @@ package com.slashmobility.seleccion.albert.cid.presentation.common
 
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
@@ -16,8 +17,11 @@ abstract class BaseActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.NewInstanceFactory
 
+    protected lateinit var dateFormat: java.text.DateFormat
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
+        dateFormat = DateFormat.getDateFormat(this)
         super.onCreate(savedInstanceState)
     }
 

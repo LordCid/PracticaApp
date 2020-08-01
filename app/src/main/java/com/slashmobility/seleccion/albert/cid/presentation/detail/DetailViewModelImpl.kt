@@ -1,5 +1,6 @@
 package com.slashmobility.seleccion.albert.cid.presentation.detail
 
+import android.text.format.DateFormat
 import androidx.lifecycle.*
 import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupUseCase
 import com.slashmobility.seleccion.albert.cid.domain.usecase.ChangeGroupFavoriteStatusUseCase
@@ -18,6 +19,7 @@ class DetailViewModelImpl(
     private val _detailState: MutableLiveData<DetailViewState> = MutableLiveData()
     override val detailState: LiveData<DetailViewState>
         get() = _detailState
+
 
     override fun getGroupDetailData(id: Int) {
         viewModelScope.launch {

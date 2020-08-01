@@ -27,7 +27,7 @@ class FavoritesActivity : BaseActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        groupAdapter = GroupListAdapter(imagesLoader)
+        groupAdapter = GroupListAdapter(imagesLoader, dateFormat)
         viewModel = ViewModelProviders.of(
             this,
             viewModelFactory

@@ -52,7 +52,7 @@ class DetailActivity : BaseActivity() {
     private fun showData(group: Group) {
         supportActionBar?.title = group.name
         title_tv.text = group.name
-        date_tv.text = group.dateLong.toString()
+        date_tv.text = dateFormat.format(group.dateLong)
         description_short_tv.text = group.descriptionShort
         description_tv.text = group.description
         imagesLoader.loadImage(group.defaultImageUrl, header_container)

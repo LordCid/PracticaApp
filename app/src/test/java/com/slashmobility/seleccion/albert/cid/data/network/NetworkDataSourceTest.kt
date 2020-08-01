@@ -19,11 +19,10 @@ class NetworkDataSourceTest {
 
     private lateinit var sut: NetworkDataSource
     private val apiService = mock<ApiService>()
-    private val mapper = NetworkDataSourceMapper()
 
     @Before
     fun setUp() {
-        sut = NetworkDataSourceImpl(apiService, mapper)
+        sut = NetworkDataSourceImpl(apiService)
     }
 
     @Test
