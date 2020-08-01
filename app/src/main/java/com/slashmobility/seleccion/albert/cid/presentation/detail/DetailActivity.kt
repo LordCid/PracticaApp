@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.slashmobility.seleccion.albert.cid.R
+import com.slashmobility.seleccion.albert.cid.domain.GROUP_ID
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.detail.state.DetailViewState
 import com.slashmobility.seleccion.albert.cid.presentation.imagedetail.ImageGalleryActivity
-import com.slashmobility.seleccion.albert.cid.presentation.main.GROUP_ID
 import kotlinx.android.synthetic.main.activity_detail.*
 
 /**
@@ -69,7 +69,9 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun goToPhotoGallery(){
-        startActivity(Intent(this, ImageGalleryActivity::class.java))
+        val intent = Intent(this, ImageGalleryActivity::class.java)
+        intent.putExtra(GROUP_ID, groupId)
+        startActivity(intent)
     }
 
 }

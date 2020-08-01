@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.slashmobility.seleccion.albert.cid.R
+import com.slashmobility.seleccion.albert.cid.domain.GROUP_ID
 import com.slashmobility.seleccion.albert.cid.domain.model.Group
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import com.slashmobility.seleccion.albert.cid.presentation.common.ErrorDialogFragment
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.fragment_list.listView
 
-const val GROUP_ID = "GROUP_ID"
+
 class MainActivity : BaseActivity() {
 
     private lateinit var groupAdapter: GroupListAdapter

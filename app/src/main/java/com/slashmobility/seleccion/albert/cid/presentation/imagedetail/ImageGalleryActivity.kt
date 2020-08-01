@@ -3,6 +3,7 @@ package com.slashmobility.seleccion.albert.cid.presentation.imagedetail
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.slashmobility.seleccion.albert.cid.R
+import com.slashmobility.seleccion.albert.cid.domain.GROUP_ID
 import com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_image_gallery.*
 
@@ -10,6 +11,8 @@ class ImageGalleryActivity : BaseActivity() {
 
     private lateinit var imagePageAdapter: ImagePageAdapter
     private lateinit var viewModel: ImageGalleryViewModelImpl
+
+    private val groupId: Int by lazy { intent?.extras?.getInt(GROUP_ID) ?: 0 }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +26,7 @@ class ImageGalleryActivity : BaseActivity() {
             viewModelFactory
         )[ImageGalleryViewModelImpl::class.java]
         viewModel.viewState.observe(::getLifecycle, ::updateUI)
-        viewModel.getImages(2)
+        viewModel.getImages(groupId)
     }
 
     private fun updateUI(viewState: ImageGalleryState) {
