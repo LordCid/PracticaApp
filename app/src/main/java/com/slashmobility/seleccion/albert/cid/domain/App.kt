@@ -5,6 +5,7 @@ import com.slashmobility.seleccion.albert.cid.di.ApplicationComponent
 import com.slashmobility.seleccion.albert.cid.di.ApplicationComponentFactory
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
+import io.realm.Realm
 
 class App : DaggerApplication() {
 
@@ -17,6 +18,7 @@ class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        Realm.init(this)
         applicationComponent.inject(this)
     }
 }

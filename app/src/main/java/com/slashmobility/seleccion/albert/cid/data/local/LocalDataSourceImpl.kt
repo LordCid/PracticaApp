@@ -11,20 +11,13 @@ import io.realm.RealmList
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
-    private val app: App
+    private val realmManager: RealmManager
 ) : LocalDataSource {
 
-    lateinit var realm: Realm
-
-    private fun getRealmInstance(): Realm {
-        Realm.init(app)
-        val config = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
-        Realm.setDefaultConfiguration(config)
-        return Realm.getDefaultInstance()
-    }
+    private lateinit var realm: Realm
 
     override suspend fun storeGroupList(groupList: List<Group>) {
-        realm = getRealmInstance()
+        realm = realmManager.getRealmInstance()
         val realmList = groupList.map { it.toGroupRealmObject() }.toCollection(RealmList())
         realm.executeTransaction {
             it.deleteAll()
@@ -34,7 +27,7 @@ class LocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getGroupList(favorite: Boolean): Result<List<Group>> {
-        realm = getRealmInstance()
+        realm = realmManager.getRealmInstance()
         return runCatching {
             if(favorite){
                 realm.where(GroupRealmModel::class.java).equalTo("isFavorite", true).findAll()
@@ -48,7 +41,7 @@ class LocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getGroup(id: Int): Result<Group> {
-        realm = getRealmInstance()
+        realm = realmManager.getRealmInstance()
         return runCatching {
             realm.where(GroupRealmModel::class.java).findAll().map {
                 it.toGroup()
@@ -57,7 +50,7 @@ class LocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun changeFavoriteStatus(id: Int): Result<Unit> {
-        realm = getRealmInstance()
+        realm = realmManager.getRealmInstance()
         return runCatching {
             realm.executeTransaction {
                 val item = it.where(GroupRealmModel::class.java).equalTo("id", id).findFirst()
