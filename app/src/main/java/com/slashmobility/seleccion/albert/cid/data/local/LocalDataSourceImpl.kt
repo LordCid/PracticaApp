@@ -29,14 +29,16 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun getGroupList(favorite: Boolean): Result<List<Group>> {
         realm = realmManager.getRealmInstance()
         return runCatching {
-            if(favorite){
-                realm.where(GroupRealmModel::class.java).equalTo("isFavorite", true).findAll()
-                    .map{ it.toGroup() }
+            val results = if(favorite){
+                realm.where(GroupRealmModel::class.java).equalTo("isFavorite", true)
+                   .findAll().map{ it.toGroup() }
             } else {
                 realm.where(GroupRealmModel::class.java).findAll().map {
                     it.toGroup()
                 }
             }
+            if(results.isEmpty()) throw Exception()
+            results
         }
     }
 
