@@ -1,24 +1,24 @@
 package com.slashmobility.seleccion.albert.cid.domain
 
 
-import com.slashmobility.seleccion.albert.cid.di.ApplicationComponent
-import com.slashmobility.seleccion.albert.cid.di.ApplicationComponentFactory
+import com.slashmobility.seleccion.albert.cid.di.AppComponent
+import com.slashmobility.seleccion.albert.cid.di.AppComponentFactory
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import io.realm.Realm
 
-class App : DaggerApplication() {
+open class App : DaggerApplication() {
 
-    lateinit var applicationComponent: ApplicationComponent
+    open lateinit var appComponent: AppComponent
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        applicationComponent = ApplicationComponentFactory.create(this)
-        return applicationComponent
+        appComponent = AppComponentFactory.create(this)
+        return appComponent
     }
 
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
-        applicationComponent.inject(this)
+        appComponent.inject(this)
     }
 }

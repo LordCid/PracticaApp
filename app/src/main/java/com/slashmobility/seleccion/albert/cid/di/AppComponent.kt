@@ -5,6 +5,7 @@ import com.slashmobility.seleccion.albert.cid.domain.App
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
 @Component(
     modules = [
@@ -13,13 +14,13 @@ import dagger.android.AndroidInjector
         ActivityBuilder::class
     ]
 )
-interface ApplicationComponent : AndroidInjector<App> {
+interface AppComponent : AndroidInjector<DaggerApplication> {
     @Component.Factory
     interface Factory {
         fun create(
             @BindsInstance app: App
-        ): ApplicationComponent
+        ): AppComponent
     }
 }
 
-object ApplicationComponentFactory : ApplicationComponent.Factory by DaggerApplicationComponent.factory()
+object AppComponentFactory : AppComponent.Factory by DaggerAppComponent.factory()
