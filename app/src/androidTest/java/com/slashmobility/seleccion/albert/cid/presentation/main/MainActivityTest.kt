@@ -20,6 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -30,7 +31,7 @@ class MainActivityTest {
 
     @Mock
     private lateinit var viewModelFactory: MainListViewModelFactory
-    private val viewModel = mock<MainListViewModelImpl>()
+    private val viewModel = Mockito.mock(MainListViewModelImpl::class.java)
     private val liveDataViewState = mock<MutableLiveData<MainViewState>>()
 
     @Before
@@ -51,7 +52,6 @@ class MainActivityTest {
 
         activityRule.launchActivity(intent)
     }
-
 
 
     @Test
