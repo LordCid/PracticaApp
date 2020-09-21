@@ -87,6 +87,4 @@ class MainActivity : BaseActivity() {
         val errorDialog = ErrorDialogFragment()
         errorDialog.show(supportFragmentManager, "error")
     }
-
-
 }

@@ -11,5 +11,4 @@ class RealmManager @Inject constructor() {
         Realm.setDefaultConfiguration(config)
         return Realm.getDefaultInstance()
     }
-
 }

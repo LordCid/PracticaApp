@@ -17,7 +17,6 @@ class RepositoryImpl @Inject constructor(
         } else {
             results.onSuccess { localDataSource.storeGroupList(it) }
         }
-
     }
 
     override suspend fun getFavoritesGroupList() = localDataSource.getGroupList(true)
