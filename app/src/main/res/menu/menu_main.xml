@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.slashmobility.seleccion.albert.cid.presentation.common.BaseActivity">
+    tools:context="com.albert.cid.presentation.common.BaseActivity">
     <item
         android:id="@+id/action_favorites"
         android:orderInCategory="100"
