@@ -4,7 +4,6 @@ package com.slashmobility.seleccion.albert.cid.di
 import com.slashmobility.seleccion.albert.cid.presentation.detail.DetailActivity
 import com.slashmobility.seleccion.albert.cid.presentation.favorites.FavoritesActivity
 import com.slashmobility.seleccion.albert.cid.presentation.imagedetail.ImageGalleryActivity
-import com.slashmobility.seleccion.albert.cid.presentation.main.ListFragment
 import com.slashmobility.seleccion.albert.cid.presentation.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
