@@ -2,6 +2,7 @@ package com.slashmobility.seleccion.albert.cid.presentation.main
 
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -10,6 +11,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Before
 import androidx.test.rule.ActivityTestRule
+import com.nhaarman.mockitokotlin2.given
+import com.nhaarman.mockitokotlin2.mock
 import com.slashmobility.seleccion.albert.cid.di.TestAppComponentFactory
 import com.slashmobility.seleccion.albert.cid.domain.App
 import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
@@ -17,6 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -27,8 +31,8 @@ class MainActivityTest {
 
     @Mock
     private lateinit var viewModelFactory: MainListViewModelFactory
-//    private val viewModel = Mockito.mock(MainListViewModelImpl::class.java)
-    private val liveDataViewState = MutableLiveData<MainViewState>()
+    private val viewModel = Mockito.mock(MainListViewModelImpl::class.java)
+    private val liveDataViewState = mock<MutableLiveData<MainViewState>>()
 
     @Before
     fun setUp() {
@@ -51,19 +55,19 @@ class MainActivityTest {
 
 
     @Test
-    fun whenErrorStateShowErrorDialog() {
+    fun WhenErrorStateShowErrorDialog() {
         givenErrorState()
 
         onView(withText("Error al descargar grupos")).check(matches(isDisplayed()))
     }
 
     private fun stubViewModelFactory() {
-//       given(viewModelFactory.create(MainListViewModelImpl::class.java)).willReturn(viewModel)
+       given(viewModelFactory.create(MainListViewModelImpl::class.java)).willReturn(viewModel)
     }
 
     private fun givenErrorState() {
         liveDataViewState.value = MainViewState.Error
-//        given(viewModel.mainViewState).willReturn(liveDataViewState)
-//        given(viewModel.getGroups()).willAnswer { viewModel.mainViewState }
+        given(viewModel.mainViewState).willReturn(liveDataViewState)
+        given(viewModel.getGroups()).willAnswer { viewModel.mainViewState }
     }
 }
