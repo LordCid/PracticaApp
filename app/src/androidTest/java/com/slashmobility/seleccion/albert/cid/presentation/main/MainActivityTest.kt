@@ -55,7 +55,7 @@ class MainActivityTest {
 
 
     @Test
-    fun WhenErrorStateShowErrorDialog() {
+    fun whenErrorStateShowErrorDialog() {
         givenErrorState()
 
         onView(withText("Error al descargar grupos")).check(matches(isDisplayed()))
