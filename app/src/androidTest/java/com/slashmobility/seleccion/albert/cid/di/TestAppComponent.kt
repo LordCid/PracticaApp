@@ -1,13 +1,9 @@
 package com.slashmobility.seleccion.albert.cid.di
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.slashmobility.seleccion.albert.cid.domain.App
-import com.slashmobility.seleccion.albert.cid.presentation.main.MainListViewModel
+import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCase
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
-import dagger.Provides
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import javax.inject.Singleton
@@ -16,12 +12,14 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppModule::class,
-        TestActivityBuilder::class
+        TestActivityBuilder::class,
+        ImageLoaderModule::class,
+        TestDomainModule::class
     ]
 )
 interface TestAppComponent: AndroidInjector<DaggerApplication> {
 
-    fun getViewModelFactory():ViewModelProvider.NewInstanceFactory
+    fun getGroupListUseCase(): GetGroupListUseCase
 
     @Component.Factory
     interface Factory {

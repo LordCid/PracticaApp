@@ -11,7 +11,11 @@ import dagger.android.DaggerApplication
     modules = [
         AppModule::class,
         ApplicationProviderModule::class,
-        ActivityBuilder::class
+        ActivityBuilder::class,
+        DomainModule::class,
+        DataModule::class,
+        ProvidesModule::class,
+        ImageLoaderModule::class
     ]
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {

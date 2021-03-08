@@ -9,14 +9,7 @@ import com.slashmobility.seleccion.albert.cid.presentation.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Module(
-    includes = [
-        DomainModule::class,
-        DataModule::class,
-        ProvidesModule::class,
-        ImageLoaderModule::class
-    ]
-)
+@Module
 interface ActivityBuilder {
     @ContributesAndroidInjector(modules = [MainListModule::class])
     fun bindMainListActivity(): MainActivity
