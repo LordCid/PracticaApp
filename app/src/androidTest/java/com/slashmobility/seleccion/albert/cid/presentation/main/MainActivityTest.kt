@@ -1,26 +1,26 @@
 package com.slashmobility.seleccion.albert.cid.presentation.main
 
 import android.content.Intent
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Before
 import androidx.test.rule.ActivityTestRule
-import com.nhaarman.mockitokotlin2.given
-import com.nhaarman.mockitokotlin2.mock
+//import com.nhaarman.mockitokotlin2.given
+//import com.nhaarman.mockitokotlin2.mock
 import com.slashmobility.seleccion.albert.cid.di.TestAppComponentFactory
 import com.slashmobility.seleccion.albert.cid.domain.App
-import com.slashmobility.seleccion.albert.cid.presentation.main.state.MainViewState
+import com.slashmobility.seleccion.albert.cid.domain.usecase.GetGroupListUseCase
+import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
+import org.mockito.BDDMockito.given
 import org.mockito.Mockito
+import org.mockito.Mockito.mock
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -29,10 +29,8 @@ class MainActivityTest {
     @JvmField
     val activityRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @Mock
-    private lateinit var viewModelFactory: MainListViewModelFactory
-    private val viewModel = Mockito.mock(MainListViewModelImpl::class.java)
-    private val liveDataViewState = mock<MutableLiveData<MainViewState>>()
+    private lateinit var getGroupListUseCase: GetGroupListUseCase
+
 
     @Before
     fun setUp() {
@@ -41,9 +39,8 @@ class MainActivityTest {
         val appComponent = TestAppComponentFactory.create(app)
         appComponent.inject(app)
 
-        viewModelFactory = appComponent.getViewModelFactory() as MainListViewModelFactory
+        getGroupListUseCase = appComponent.getGroupListUseCase()
 
-        stubViewModelFactory()
 
         val intent = Intent(
             InstrumentationRegistry.getInstrumentation()
@@ -56,18 +53,12 @@ class MainActivityTest {
 
     @Test
     fun whenErrorStateShowErrorDialog() {
-        givenErrorState()
+        val throwable = mock(Throwable::class.java)
+        runBlocking {
+            given(getGroupListUseCase.invoke()).willReturn(Result.failure(throwable))
 
-        onView(withText("Error al descargar grupos")).check(matches(isDisplayed()))
+            onView(withText("Error al descargar grupos")).check(matches(isDisplayed()))
+        }
     }
 
-    private fun stubViewModelFactory() {
-       given(viewModelFactory.create(MainListViewModelImpl::class.java)).willReturn(viewModel)
-    }
-
-    private fun givenErrorState() {
-        liveDataViewState.value = MainViewState.Error
-        given(viewModel.mainViewState).willReturn(liveDataViewState)
-        given(viewModel.getGroups()).willAnswer { viewModel.mainViewState }
-    }
 }
